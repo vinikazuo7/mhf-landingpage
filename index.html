@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MHF Partners — IA e Automações para Empresas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg-deep: #080d14;
+      --bg-dark: #0d1520;
+      --bg-card: #111c2a;
+      --accent: #00c2ff;
+      --accent-glow: rgba(0,194,255,0.15);
+      --accent-dark: #0099cc;
+      --text-primary: #f0f4f8;
+      --text-secondary: #8fa5bf;
+      --text-muted: #556a80;
+      --border: rgba(0,194,255,0.12);
+      --border-soft: rgba(255,255,255,0.06);
+      --red: #ff4d6a;
+      --red-glow: rgba(255,77,106,0.12);
+      --green: #00d68f;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg-deep); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+    h1,h2,h3,h4 { font-family: 'Sora', sans-serif; }
+
+    /* ── NAVBAR ── */
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; transition: background .4s, padding .4s; }
+    #navbar.scrolled { background: rgba(8,13,20,.95); backdrop-filter: blur(16px); padding: 14px 40px; border-bottom: 1px solid var(--border-soft); }
+    .nav-logo { font-family: 'Sora', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text-primary); text-decoration: none; letter-spacing: -.02em; }
+    .nav-logo span { color: var(--accent); }
+    .nav-center { display: flex; gap: 36px; list-style: none; }
+    .nav-center a { color: var(--text-secondary); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color .2s; }
+    .nav-center a:hover { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 18px; }
+    .nav-icon { color: var(--text-secondary); font-size: 1.1rem; text-decoration: none; transition: color .2s; }
+    .nav-icon:hover { color: var(--accent); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(8,13,20,.98); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--text-primary); text-decoration: none; font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 600; }
+    .mobile-close { position: absolute; top: 24px; right: 28px; background: none; border: none; color: var(--text-primary); font-size: 1.8rem; cursor: pointer; }
+
+    /* ── HERO ── */
+    #hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: linear-gradient(135deg, #080d14 0%, #0d2035 50%, #080d14 100%); }
+    .hero-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,194,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,194,255,.04) 1px, transparent 1px); background-size: 60px 60px; }
+    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0,194,255,.12) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+    .hero-content { position: relative; z-index: 2; text-align: center; max-width: 860px; padding: 0 24px; }
+    .hero-badge { display: inline-block; background: var(--accent-glow); border: 1px solid var(--border); color: var(--accent); font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 28px; }
+    .hero-title { font-size: clamp(2.4rem,5.5vw,4rem); font-weight: 800; line-height: 1.1; letter-spacing: -.03em; margin-bottom: 22px; }
+    .hero-title em { font-style: normal; color: var(--accent); }
+    .hero-subtitle { font-size: clamp(1rem,2vw,1.15rem); color: var(--text-secondary); max-width: 640px; margin: 0 auto 40px; line-height: 1.7; }
+    .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── BUTTONS ── */
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #040810; font-family: 'Sora', sans-serif; font-weight: 700; font-size: .92rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; transition: background .2s, transform .2s, box-shadow .2s; box-shadow: 0 0 24px rgba(0,194,255,.3); }
+    .btn-primary:hover { background: #33d1ff; transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,194,255,.5); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text-primary); font-family: 'Sora', sans-serif; font-weight: 600; font-size: .92rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; border: 1px solid var(--border-soft); transition: border-color .2s, color .2s, transform .2s; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* ── SHARED ── */
+    section { padding: 96px 24px; }
+    .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: block; }
+    .section-title { font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.15; margin-bottom: 16px; }
+    .section-subtitle { font-size: 1rem; color: var(--text-secondary); max-width: 580px; line-height: 1.7; }
+    .section-header { margin-bottom: 56px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-subtitle { margin: 0 auto; }
+    .container { max-width: 1160px; margin: 0 auto; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── METRICS ── */
+    #social-proof { background: var(--bg-card); padding: 60px 24px; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+    .metrics-text { text-align: center; font-size: .85rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 40px; }
+    .metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); max-width: 900px; margin: 0 auto; }
+    .metric-item { text-align: center; padding: 28px 20px; border-right: 1px solid var(--border-soft); }
+    .metric-item:last-child { border-right: none; }
+    .metric-number { font-family: 'Sora', sans-serif; font-size: clamp(2rem,4vw,2.8rem); font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+    .metric-label { font-size: .82rem; color: var(--text-muted); font-weight: 500; line-height: 1.4; }
+
+    /* ── PAIN SECTION ── */
+    #pain { background: var(--bg-deep); }
+    .pain-intro { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+    .pain-intro p { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.75; }
+    .pain-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; max-width: 900px; margin: 0 auto 56px; }
+    .pain-card { background: var(--bg-card); border: 1px solid rgba(255,77,106,.15); border-radius: 14px; padding: 28px; display: flex; align-items: flex-start; gap: 18px; transition: border-color .3s, transform .3s; }
+    .pain-card:hover { border-color: rgba(255,77,106,.35); transform: translateY(-3px); }
+    .pain-icon { width: 44px; height: 44px; background: var(--red-glow); border: 1px solid rgba(255,77,106,.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--red); flex-shrink: 0; }
+    .pain-text h4 { font-family: 'Sora', sans-serif; font-size: .95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .pain-text p { font-size: .86rem; color: var(--text-secondary); line-height: 1.6; }
+    .pain-bridge { text-align: center; max-width: 620px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 32px; }
+    .pain-bridge p { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.75; }
+    .pain-bridge strong { color: var(--accent); }
+
+    /* ── SEGMENTS ── */
+    #segments { background: var(--bg-card); }
+    .segments-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .segment-card { background: var(--bg-dark); border: 1px solid var(--border-soft); border-radius: 12px; padding: 28px 24px; display: flex; align-items: flex-start; gap: 16px; transition: border-color .3s, transform .3s; cursor: default; }
+    .segment-card:hover { border-color: var(--border); transform: translateY(-3px); }
+    .segment-emoji { font-size: 1.8rem; flex-shrink: 0; margin-top: 2px; }
+    .segment-info h4 { font-family: 'Sora', sans-serif; font-size: .92rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .segment-info p { font-size: .82rem; color: var(--text-secondary); line-height: 1.5; }
+    .segment-tag { display: inline-block; background: var(--accent-glow); border: 1px solid var(--border); color: var(--accent); font-size: .68rem; font-weight: 700; letter-spacing: .06em; padding: 3px 10px; border-radius: 100px; margin-top: 10px; }
+
+    /* ── HOW IT WORKS ── */
+    #how { background: var(--bg-deep); }
+    .steps-row { display: flex; align-items: flex-start; gap: 0; position: relative; }
+    .steps-row::before { content: ''; position: absolute; top: 32px; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--border-soft) 20%, var(--border-soft) 80%, transparent); z-index: 0; }
+    .step { flex: 1; text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+    .step-number { width: 64px; height: 64px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--accent); margin: 0 auto 24px; position: relative; box-shadow: 0 0 20px rgba(0,194,255,.15); }
+    .step-title { font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; }
+    .step-desc { font-size: .86rem; color: var(--text-secondary); line-height: 1.6; }
+    .step-duration { display: inline-block; margin-top: 12px; background: var(--accent-glow); border: 1px solid var(--border); color: var(--accent); font-size: .7rem; font-weight: 700; letter-spacing: .06em; padding: 3px 12px; border-radius: 100px; }
+
+    /* ── TIERS ── */
+    #tiers { background: var(--bg-card); }
+    .tiers-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .tier-card { background: var(--bg-dark); border: 1px solid var(--border-soft); border-radius: 16px; padding: 36px 30px; position: relative; transition: transform .3s, border-color .3s, box-shadow .3s; }
+    .tier-card:hover { transform: translateY(-4px); border-color: rgba(0,194,255,.2); }
+    .tier-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(0,194,255,.12); background: var(--bg-card); }
+    .tier-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #040810; font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 16px; border-radius: 100px; white-space: nowrap; }
+    .tier-name { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .tier-headline { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--text-primary); margin-bottom: 12px; }
+    .tier-target { font-size: .88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border-soft); }
+    .tier-features { list-style: none; margin-bottom: 32px; display: flex; flex-direction: column; gap: 12px; }
+    .tier-features li { display: flex; align-items: flex-start; gap: 10px; font-size: .88rem; color: var(--text-secondary); line-height: 1.5; }
+    .tier-features li i { color: var(--accent); font-size: .75rem; margin-top: 4px; flex-shrink: 0; }
+    .tier-cta { display: block; text-align: center; background: transparent; border: 1px solid var(--border); color: var(--accent); font-family: 'Sora', sans-serif; font-size: .88rem; font-weight: 600; padding: 13px 20px; border-radius: 8px; text-decoration: none; transition: background .2s, border-color .2s; }
+    .tier-cta:hover { background: var(--accent-glow); border-color: var(--accent); }
+    .tier-card.featured .tier-cta { background: var(--accent); color: #040810; border-color: var(--accent); }
+    .tier-card.featured .tier-cta:hover { background: #33d1ff; }
+
+    /* ── BENEFITS ── */
+    #benefits { background: var(--bg-deep); }
+    .benefits-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .benefit-card { background: var(--bg-card); border: 1px solid var(--border-soft); border-radius: 14px; padding: 36px 28px; transition: border-color .3s, transform .3s; }
+    .benefit-card:hover { border-color: rgba(0,194,255,.25); transform: translateY(-3px); }
+    .benefit-icon { width: 48px; height: 48px; background: var(--accent-glow); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--accent); margin-bottom: 24px; }
+    .benefit-title { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+    .benefit-desc { font-size: .9rem; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ── IMPLEMENTATIONS ── */
+    #implementations { background: var(--bg-card); }
+    .impl-categories { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; margin-bottom: 48px; }
+    .impl-category { background: var(--bg-dark); border: 1px solid var(--border-soft); border-radius: 14px; padding: 28px; }
+    .impl-cat-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border-soft); }
+    .impl-cat-icon { font-size: 1.4rem; }
+    .impl-cat-title { font-family: 'Sora', sans-serif; font-size: .95rem; font-weight: 700; }
+    .impl-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .impl-list li { display: flex; align-items: flex-start; gap: 10px; font-size: .86rem; color: var(--text-secondary); line-height: 1.5; }
+    .impl-list li i { color: var(--accent); font-size: .65rem; margin-top: 5px; flex-shrink: 0; }
+    .impl-total { text-align: center; margin-bottom: 36px; font-size: .85rem; color: var(--text-muted); }
+    .impl-total strong { color: var(--accent); }
+    .impl-cta-wrap { text-align: center; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--bg-deep); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .testimonial-card { background: var(--bg-card); border: 1px solid var(--border-soft); border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; gap: 20px; transition: border-color .3s, transform .3s; }
+    .testimonial-card:hover { border-color: rgba(0,194,255,.2); transform: translateY(-3px); }
+    .testimonial-stars { color: #f5c518; font-size: .85rem; letter-spacing: 2px; }
+    .testimonial-text { font-size: .92rem; color: var(--text-secondary); line-height: 1.75; font-style: italic; flex: 1; }
+    .testimonial-text::before { content: '"'; font-family: 'Sora', sans-serif; font-size: 2.5rem; color: var(--accent); opacity: .3; display: block; line-height: .8; margin-bottom: 8px; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; padding-top: 20px; border-top: 1px solid var(--border-soft); }
+    .testimonial-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent-glow); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: .95rem; font-weight: 800; color: var(--accent); flex-shrink: 0; }
+    .testimonial-name { font-family: 'Sora', sans-serif; font-size: .88rem; font-weight: 700; color: var(--text-primary); }
+    .testimonial-role { font-size: .78rem; color: var(--text-muted); margin-top: 2px; }
+    .testimonial-result { display: inline-block; background: rgba(0,214,143,.1); border: 1px solid rgba(0,214,143,.2); color: var(--green); font-size: .72rem; font-weight: 700; letter-spacing: .05em; padding: 4px 12px; border-radius: 100px; margin-top: 8px; }
+    .testimonials-disclaimer { text-align: center; margin-top: 28px; font-size: .78rem; color: var(--text-muted); }
+
+    /* ── FINAL CTA ── */
+    #final-cta { background: linear-gradient(135deg, #0a1828 0%, #0d2035 50%, #0a1828 100%); border-top: 1px solid var(--border-soft); position: relative; overflow: hidden; }
+    #final-cta::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(0,194,255,.08) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .final-cta-inner { position: relative; text-align: center; max-width: 640px; margin: 0 auto; }
+    .final-cta-title { font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 800; letter-spacing: -.03em; margin-bottom: 40px; }
+    .cta-points { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; text-align: left; max-width: 400px; margin-left: auto; margin-right: auto; }
+    .cta-points li { display: flex; align-items: center; gap: 12px; font-size: .95rem; color: var(--text-secondary); }
+    .cta-points li i { color: var(--accent); font-size: .85rem; }
+    .final-trust { margin-top: 20px; font-size: .82rem; color: var(--text-muted); }
+
+    /* ── FAQ ── */
+    #faq { background: var(--bg-card); }
+    .faq-list { max-width: 740px; margin: 0 auto; display: flex; flex-direction: column; gap: 2px; }
+    .faq-item { background: var(--bg-dark); border: 1px solid var(--border-soft); border-radius: 10px; overflow: hidden; margin-bottom: 4px; }
+    .faq-question { width: 100%; text-align: left; background: none; border: none; padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; color: var(--text-primary); font-family: 'Sora', sans-serif; font-size: .95rem; font-weight: 600; transition: color .2s; }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon { color: var(--accent); font-size: .85rem; flex-shrink: 0; transition: transform .3s; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+    .faq-item.open .faq-answer { max-height: 300px; }
+    .faq-answer p { padding: 0 24px 22px; font-size: .9rem; color: var(--text-secondary); line-height: 1.75; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--bg-dark); border-top: 1px solid var(--border-soft); padding: 72px 24px 0; }
+    .footer-grid { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr .8fr; gap: 48px; padding-bottom: 64px; }
+    .footer-logo { font-family: 'Sora', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; }
+    .footer-logo span { color: var(--accent); }
+    .footer-desc { font-size: .85rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+    .footer-info { font-size: .8rem; color: var(--text-muted); line-height: 1.8; }
+    .footer-col-title { font-family: 'Sora', sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: .88rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--accent); }
+    .social-icons { display: flex; gap: 12px; }
+    .social-icon { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-soft); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; font-size: .95rem; transition: background .2s, border-color .2s, color .2s; }
+    .social-icon:hover { background: var(--accent-glow); border-color: var(--accent); color: var(--accent); }
+    .footer-bottom { max-width: 1160px; margin: 0 auto; padding: 24px 0; border-top: 1px solid var(--border-soft); text-align: center; }
+    .footer-bottom p { font-size: .8rem; color: var(--text-muted); }
+
+    /* ── FLOATING WHATSAPP ── */
+    #float-wa { position: fixed; bottom: 28px; right: 28px; z-index: 900; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+    .float-wa-bubble { background: #25d366; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,.4); transition: transform .2s, box-shadow .2s; }
+    .float-wa-bubble:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,.6); }
+    .float-wa-label { background: var(--bg-card); border: 1px solid var(--border-soft); color: var(--text-secondary); font-size: .8rem; font-weight: 600; padding: 6px 14px; border-radius: 100px; white-space: nowrap; opacity: 0; transform: translateX(10px); transition: opacity .3s, transform .3s; pointer-events: none; }
+    #float-wa:hover .float-wa-label { opacity: 1; transform: translateX(0); }
+    .float-wa-ping { position: absolute; top: 0; right: 0; width: 16px; height: 16px; background: var(--red); border-radius: 50%; border: 2px solid var(--bg-deep); animation: ping 2s ease-in-out infinite; }
+    @keyframes ping { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: .7; } }
+
+    /* ── EXIT INTENT POPUP ── */
+    #exit-popup { display: none; position: fixed; inset: 0; z-index: 2000; align-items: center; justify-content: center; background: rgba(4,8,16,.85); backdrop-filter: blur(8px); }
+    #exit-popup.active { display: flex; }
+    .popup-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 48px 40px; max-width: 480px; width: 90%; text-align: center; position: relative; box-shadow: 0 0 60px rgba(0,194,255,.1); animation: popIn .3s ease; }
+    @keyframes popIn { from { transform: scale(.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .popup-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer; transition: color .2s; }
+    .popup-close:hover { color: var(--text-primary); }
+    .popup-emoji { font-size: 2.8rem; margin-bottom: 16px; display: block; }
+    .popup-title { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 10px; }
+    .popup-subtitle { font-size: .9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 28px; }
+    .popup-form { display: flex; flex-direction: column; gap: 12px; }
+    .popup-input { background: var(--bg-dark); border: 1px solid var(--border-soft); border-radius: 8px; padding: 13px 16px; color: var(--text-primary); font-family: 'DM Sans', sans-serif; font-size: .92rem; outline: none; transition: border-color .2s; }
+    .popup-input::placeholder { color: var(--text-muted); }
+    .popup-input:focus { border-color: var(--accent); }
+    .popup-btn { background: var(--accent); color: #040810; font-family: 'Sora', sans-serif; font-weight: 700; font-size: .92rem; padding: 14px; border-radius: 8px; border: none; cursor: pointer; transition: background .2s; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+    .popup-btn:hover { background: #33d1ff; }
+    .popup-skip { margin-top: 14px; font-size: .78rem; color: var(--text-muted); cursor: pointer; text-decoration: underline; }
+    .popup-skip:hover { color: var(--text-secondary); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .segments-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 900px) {
+      .tiers-grid, .benefits-grid, .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+      .impl-categories, .pain-grid { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: repeat(2,1fr); }
+      .metric-item { border-right: none; border-bottom: 1px solid var(--border-soft); }
+      .metric-item:last-child { border-bottom: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .nav-center { display: none; }
+      .hamburger { display: flex; }
+      .steps-row { flex-direction: column; gap: 40px; }
+      .steps-row::before { display: none; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 72px 20px; }
+      #navbar { padding: 18px 20px; }
+      #navbar.scrolled { padding: 14px 20px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .segments-grid { grid-template-columns: 1fr; }
+      #float-wa { bottom: 20px; right: 20px; }
+      .float-wa-bubble { width: 54px; height: 54px; font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">MHF<span>.</span>Partners</a>
+  <ul class="nav-center">
+    <li><a href="#hero">Início</a></li>
+    <li><a href="#how">Como Funciona</a></li>
+    <li><a href="#tiers">Planos</a></li>
+    <li><a href="#testimonials">Cases</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://instagram.com/INSERIR_USUARIO" target="_blank" class="nav-icon"><i class="fab fa-instagram"></i></a>
+    <a href="https://wa.me/55INSERIR_NUMERO" target="_blank" class="nav-icon"><i class="fab fa-whatsapp"></i></a>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+  <a href="#hero" onclick="toggleMenu()">Início</a>
+  <a href="#how" onclick="toggleMenu()">Como Funciona</a>
+  <a href="#tiers" onclick="toggleMenu()">Planos</a>
+  <a href="#testimonials" onclick="toggleMenu()">Cases</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="https://wa.me/55INSERIR_NUMERO" target="_blank">WhatsApp</a>
+</div>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <span class="hero-badge">Consultoria em IA & Automações</span>
+    <h1 class="hero-title">Sua Empresa Operando<br>no <em>Próximo Nível.</em></h1>
+    <p class="hero-subtitle">A MHF Partners implementa Inteligência Artificial e automações sob medida para empresas que querem crescer sem aumentar custos — eliminando tarefas manuais, acelerando processos e gerando resultado mensurável.</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20conhecer%20as%20soluções%20da%20MHF%20Partners." target="_blank" class="btn-primary">
+        <i class="fab fa-whatsapp"></i> Quero Conhecer as Soluções
+      </a>
+      <a href="#how" class="btn-secondary">Como Funciona <i class="fas fa-arrow-down" style="font-size:.8rem"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ── METRICS ── -->
+<div id="social-proof">
+  <p class="metrics-text">Nossa capacidade técnica</p>
+  <div class="metrics-grid">
+    <div class="metric-item"><div class="metric-number">19</div><div class="metric-label">Implementações no Catálogo</div></div>
+    <div class="metric-item"><div class="metric-number">3</div><div class="metric-label">Planos de Serviço</div></div>
+    <div class="metric-item"><div class="metric-number">100%</div><div class="metric-label">Foco em Resultado Mensurável</div></div>
+    <div class="metric-item"><div class="metric-number">BR</div><div class="metric-label">Atendimento em Todo o Brasil</div></div>
+  </div>
+</div>
+
+<!-- ── PAIN SECTION ── -->
+<section id="pain">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <span class="section-label">Você se identifica?</span>
+      <h2 class="section-title">Sua Empresa Trava Porque o Operacional Domina o Estratégico.</h2>
+    </div>
+    <div class="pain-intro fade-in">
+      <p>A maioria dos empresários não para de crescer por falta de vontade ou de mercado. Geralmente por causa de processos manuais que consomem tempo, dinheiro e energia que deveriam estar sendo usados para vender mais e atender melhor.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card fade-in">
+        <div class="pain-icon"><i class="fas fa-comment-slash"></i></div>
+        <div class="pain-text">
+          <h4>WhatsApp que nunca para de buzinar</h4>
+          <p>Sua equipe passa horas respondendo sempre as mesmas perguntas, agendando, confirmando e reconfirmando — em vez de focar em vender e entregar.</p>
+        </div>
+      </div>
+      <div class="pain-card fade-in">
+        <div class="pain-icon"><i class="fas fa-file-excel"></i></div>
+        <div class="pain-text">
+          <h4>Financeiro na cabeça ou no Excel</h4>
+          <p>Você não sabe exatamente quanto entra, quanto sai e quanto sobra no mês — até sentar horas para montar planilhas que já estão desatualizadas quando ficam prontas.</p>
+        </div>
+      </div>
+      <div class="pain-card fade-in">
+        <div class="pain-icon"><i class="fas fa-user-clock"></i></div>
+        <div class="pain-text">
+          <h4>Clientes sumindo sem retorno</h4>
+          <p>Leads que demonstraram interesse desaparecem. Clientes que já compraram não voltam. E falta tempo para fazer o follow-up que você sabe que deveria fazer.</p>
+        </div>
+      </div>
+      <div class="pain-card fade-in">
+        <div class="pain-icon"><i class="fas fa-random"></i></div>
+        <div class="pain-text">
+          <h4>Processos que dependem só de você</h4>
+          <p>Quando você não está presente, as coisas param ou saem erradas. O negócio gira em torno da sua presença constante, e isso cria um teto invisível para o crescimento.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pain-bridge fade-in">
+      <p>Esses problemas não são sinal de incompetência — são sinal de que o negócio cresceu além da capacidade manual de operação. <strong>A solução não é contratar mais pessoas. É automatizar os processos que não precisam de pessoas.</strong> É exatamente isso que a MHF Partners faz.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── SEGMENTS ── -->
+<section id="segments">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <span class="section-label">Segmentos</span>
+      <h2 class="section-title">Atendemos Empresas de Qualquer Segmento</h2>
+      <p class="section-subtitle">Se o seu negócio tem processos repetitivos, atendimento recorrente ou dados para gerenciar — temos soluções para você.</p>
+    </div>
+    <div class="segments-grid">
+      <div class="segment-card fade-in">
+        <span class="segment-emoji">🏥</span>
+        <div class="segment-info">
+          <h4>Clínicas & Saúde</h4>
+          <p>Agendamentos, confirmações, prontuários digitais, follow-up de pacientes e faturamento automatizado.</p>
+          <span class="segment-tag">Alta demanda de agendamento</span>
+        </div>
+      </div>
+      <div class="segment-card fade-in">
+        <span class="segment-emoji">⚖️</span>
+        <div class="segment-info">
+          <h4>Escritórios & Consultorias</h4>
+          <p>Onboarding de clientes, controle de prazos, geração de relatórios e atendimento automático por WhatsApp.</p>
+          <span class="segment-tag">Alto volume de documentos</span>
+        </div>
+      </div>
+      <div class="segment-card fade-in">
+        <span class="segment-emoji">🛒</span>
+        <div class="segment-info">
+          <h4>Comércio & Varejo</h4>
+          <p>Régua de cobrança, reativação de clientes inativos, controle de estoque e atendimento 24/7 no WhatsApp.</p>
+          <span class="segment-tag">Alto volume de clientes</span>
+        </div>
+      </div>
+      <div class="segment-card fade-in">
+        <span class="segment-emoji">📣</span>
+        <div class="segment-info">
+          <h4>Agências & Marketing</h4>
+          <p>Automação de relatórios, criação de conteúdo assistida por IA e qualificação automática de leads.</p>
+          <span class="segment-tag">Produção em escala</span>
+        </div>
+      </div>
+      <div class="segment-card fade-in">
+        <span class="segment-emoji">🏗️</span>
+        <div class="segment-info">
+          <h4>Prestadores de Serviço</h4>
+          <p>Orçamentos automáticos, agendamento de visitas, confirmação de contratos e cobrança recorrente.</p>
+          <span class="segment-tag">Operação descentralizada</span>
+        </div>
+      </div>
+      <div class="segment-card fade-in">
+        <span class="segment-emoji">🎓</span>
+        <div class="segment-info">
+          <h4>Educação & Treinamentos</h4>
+          <p>Captação e nutrição de alunos, automação de matrículas, suporte automático e relatórios de engajamento.</p>
+          <span class="segment-tag">Funil de vendas complexo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section id="how">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <span class="section-label">Processo</span>
+      <h2 class="section-title">Como a MHF Partners Trabalha</h2>
+      <p class="section-subtitle">Do diagnóstico à entrega, um processo simples, transparente e sem surpresas.</p>
+    </div>
+    <div class="steps-row fade-in">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-title">Diagnóstico Gratuito</div>
+        <p class="step-desc">Entendemos a fundo o seu negócio: onde está o gargalo, o que mais consome tempo da equipe e o que pode ser automatizado com maior impacto.</p>
+        <span class="step-duration">30–45 min via WhatsApp ou Reunião</span>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-title">Plano de Implementação</div>
+        <p class="step-desc">Montamos um plano personalizado com as implementações priorizadas, cronograma realista e o que você pode esperar de resultado em cada etapa.</p>
+        <span class="step-duration">Plano personalizado entregue em até 48h</span>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-title">Implementação Técnica</div>
+        <p class="step-desc">Nossa equipe executa tudo — você não precisa entender de tecnologia. Configuramos, testamos e ajustamos cada automação até estar funcionando perfeitamente.</p>
+        <span class="step-duration">Varia por plano</span>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-title">Treinamento & Acompanhamento</div>
+        <p class="step-desc">Treinamos você e sua equipe para usar os sistemas. Depois, acompanhamos de perto nas primeiras semanas para garantir que os resultados apareçam.</p>
+        <span class="step-duration">Suporte contínuo incluso</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TIERS ── -->
+<section id="tiers">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <span class="section-label">Planos</span>
+      <h2 class="section-title">Escolha o Plano Certo Para o Seu Momento</h2>
+      <p class="section-subtitle">Três níveis de serviço desenhados para diferentes estágios de crescimento — do empreendedor solo à empresa estruturada.</p>
+    </div>
+    <div class="tiers-grid">
+      <div class="tier-card fade-in">
+        <div class="tier-name">Plano</div>
+        <div class="tier-headline">Essencial</div>
+        <p class="tier-target">Para negócios que querem dar o primeiro passo na automação e parar de perder tempo com tarefas repetitivas.</p>
+        <ul class="tier-features">
+          <li><i class="fas fa-circle"></i> Atendimento automatizado no WhatsApp</li>
+          <li><i class="fas fa-circle"></i> Confirmação e lembretes de agendamentos</li>
+          <li><i class="fas fa-circle"></i> Controle financeiro básico integrado</li>
+          <li><i class="fas fa-circle"></i> Captação de leads com formulário inteligente</li>
+        </ul>
+        <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Tenho%20interesse%20no%20Plano%20Essencial%20da%20MHF%20Partners." target="_blank" class="tier-cta">Quero o Plano Essencial</a>
+      </div>
+      <div class="tier-card featured fade-in">
+        <div class="tier-badge">Mais Escolhido</div>
+        <div class="tier-name">Plano</div>
+        <div class="tier-headline">Crescimento</div>
+        <p class="tier-target">Para empresas em expansão que precisam de processos mais sólidos e automações que acompanhem o ritmo do negócio.</p>
+        <ul class="tier-features">
+          <li><i class="fas fa-circle"></i> Tudo do plano Essencial +</li>
+          <li><i class="fas fa-circle"></i> Fluxos de nutrição e reativação de clientes</li>
+          <li><i class="fas fa-circle"></i> Relatórios financeiros automatizados (DRE)</li>
+          <li><i class="fas fa-circle"></i> Automação de processos internos e tarefas recorrentes</li>
+          <li><i class="fas fa-circle"></i> Agente de IA para atendimento e suporte no WhatsApp</li>
+        </ul>
+        <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Tenho%20interesse%20no%20Plano%20Crescimento%20da%20MHF%20Partners." target="_blank" class="tier-cta">Quero o Plano Crescimento</a>
+      </div>
+      <div class="tier-card fade-in">
+        <div class="tier-name">Plano</div>
+        <div class="tier-headline">Escala</div>
+        <p class="tier-target">Para empresas estruturadas que querem operar com IA generativa e automações avançadas de ponta a ponta.</p>
+        <ul class="tier-features">
+          <li><i class="fas fa-circle"></i> Tudo do plano Crescimento +</li>
+          <li><i class="fas fa-circle"></i> Agentes de IA com memória e personalidade da empresa</li>
+          <li><i class="fas fa-circle"></i> Base de conhecimento com RAG</li>
+          <li><i class="fas fa-circle"></i> Integrações com APIs externas e sistemas de gestão</li>
+          <li><i class="fas fa-circle"></i> Dashboard de indicadores e performance operacional</li>
+        </ul>
+        <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Tenho%20interesse%20no%20Plano%20Escala%20da%20MHF%20Partners." target="_blank" class="tier-cta">Quero o Plano Escala</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BENEFITS ── -->
+<section id="benefits">
+  <div class="container">
+    <div class="benefits-grid">
+      <div class="benefit-card fade-in">
+        <div class="benefit-icon"><i class="fas fa-puzzle-piece"></i></div>
+        <h3 class="benefit-title">Implementações Sob Medida Para o Seu Negócio.</h3>
+        <p class="benefit-desc">Não existe receita de bolo. Mapeamos os processos da sua empresa e entregamos automações que fazem sentido para a sua realidade — seja você uma clínica, uma loja, um escritório ou uma agência.</p>
+      </div>
+      <div class="benefit-card fade-in">
+        <div class="benefit-icon"><i class="fas fa-bolt"></i></div>
+        <h3 class="benefit-title">Menos Operacional. Mais Estratégia.</h3>
+        <p class="benefit-desc">Automatizamos o que consome tempo e energia da sua equipe — atendimentos, cobranças, relatórios, agendamentos — para que você e seu time foquem no que realmente gera valor para o negócio.</p>
+      </div>
+      <div class="benefit-card fade-in">
+        <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+        <h3 class="benefit-title">Entrega Real. Resultado Visível.</h3>
+        <p class="benefit-desc">Não entregamos apresentações bonitas. Entregamos sistemas funcionando. Cada implementação é acompanhada de perto para garantir que o resultado apareça no seu dia a dia — não só no papel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── IMPLEMENTATIONS ── -->
+<section id="implementations">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <span class="section-label">Catálogo</span>
+      <h2 class="section-title">O Que Podemos Implementar Na Sua Empresa</h2>
+      <p class="section-subtitle">19 soluções técnicas organizadas por área de impacto — prontas para serem adaptadas ao seu negócio.</p>
+    </div>
+    <div class="impl-categories">
+      <div class="impl-category fade-in">
+        <div class="impl-cat-header"><span class="impl-cat-icon">📱</span><span class="impl-cat-title">Atendimento & Comunicação</span></div>
+        <ul class="impl-list">
+          <li><i class="fas fa-circle"></i> Atendimento automatizado 24/7 com agente de IA</li>
+          <li><i class="fas fa-circle"></i> Confirmação e lembretes de compromissos via WhatsApp</li>
+          <li><i class="fas fa-circle"></i> Reativação automática de clientes inativos</li>
+          <li><i class="fas fa-circle"></i> FAQ automatizado com respostas personalizadas da empresa</li>
+        </ul>
+      </div>
+      <div class="impl-category fade-in">
+        <div class="impl-cat-header"><span class="impl-cat-icon">💰</span><span class="impl-cat-title">Financeiro & Gestão</span></div>
+        <ul class="impl-list">
+          <li><i class="fas fa-circle"></i> Controle financeiro automatizado com relatório mensal</li>
+          <li><i class="fas fa-circle"></i> DRE (Demonstrativo de Resultado) em tempo real</li>
+          <li><i class="fas fa-circle"></i> Régua de cobrança e alertas de inadimplência automatizados</li>
+          <li><i class="fas fa-circle"></i> Integração entre vendas e faturamento</li>
+        </ul>
+      </div>
+      <div class="impl-category fade-in">
+        <div class="impl-cat-header"><span class="impl-cat-icon">⚙️</span><span class="impl-cat-title">Processos Internos</span></div>
+        <ul class="impl-list">
+          <li><i class="fas fa-circle"></i> Automação de tarefas recorrentes e checklists operacionais</li>
+          <li><i class="fas fa-circle"></i> Fluxo de onboarding digital de novos clientes</li>
+          <li><i class="fas fa-circle"></i> Gestão de estoque com alertas automáticos</li>
+          <li><i class="fas fa-circle"></i> Centralização de documentos e processos internos</li>
+        </ul>
+      </div>
+      <div class="impl-category fade-in">
+        <div class="impl-cat-header"><span class="impl-cat-icon">🤖</span><span class="impl-cat-title">IA Generativa & Avançado</span></div>
+        <ul class="impl-list">
+          <li><i class="fas fa-circle"></i> Agente de IA com memória e personalidade da empresa</li>
+          <li><i class="fas fa-circle"></i> Base de conhecimento com RAG (respostas pelos seus documentos)</li>
+          <li><i class="fas fa-circle"></i> Captação e qualificação automática de leads</li>
+          <li><i class="fas fa-circle"></i> Dashboard de indicadores operacionais e de marketing</li>
+          <li><i class="fas fa-circle"></i> Integração com APIs externas e sistemas de terceiros</li>
+          <li><i class="fas fa-circle"></i> Criação de conteúdo automatizada para redes sociais</li>
+          <li><i class="fas fa-circle"></i> Automação de follow-up pós-venda ou pós-atendimento</li>
+        </ul>
+      </div>
+    </div>
+    <p class="impl-total"><strong>19 implementações</strong> disponíveis no catálogo MHF Partners.</p>
+    <div class="impl-cta-wrap">
+      <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Gostaria%20de%20entender%20quais%20implementações%20fazem%20sentido%20para%20o%20meu%20negócio." target="_blank" class="btn-primary">
+        <i class="fab fa-whatsapp"></i> Descobrir Quais Implementações Fazem Sentido Para Mim
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <span class="section-label">Resultados</span>
+      <h2 class="section-title">O Que Muda Depois da Automação</h2>
+      <p class="section-subtitle">Empresários que pararam de operar no limite e começaram a crescer com inteligência.</p>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">Antes da automação, minha recepcionista ficava o dia inteiro no WhatsApp confirmando consultas. Agora isso é feito automaticamente e ela pode focar no atendimento presencial. Em três semanas, zeramos as faltas sem aviso.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">C</div>
+          <div>
+            <div class="testimonial-name">Camila R.</div>
+            <div class="testimonial-role">Proprietária de Clínica Estética · Campo Grande/MS</div>
+            <span class="testimonial-result">↓ 100% das faltas sem aviso</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">Tinha medo que fosse complicado demais para o meu negócio. Não é. Em menos de duas semanas, meu WhatsApp já estava respondendo sozinho, qualificando leads e passando só os sérios pra mim. Triplicou minha capacidade de venda.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">R</div>
+          <div>
+            <div class="testimonial-name">Rafael M.</div>
+            <div class="testimonial-role">Corretor de Imóveis Autônomo · São Paulo/SP</div>
+            <span class="testimonial-result">↑ 3x mais leads qualificados</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">O relatório financeiro que eu montava na mão toda semana agora chega no meu e-mail toda segunda-feira de manhã. Sem eu fazer nada. Parece bobagem, mas isso me devolveu pelo menos 4 horas por semana que eu perdia com planilha.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name">Andréia S.</div>
+            <div class="testimonial-role">Sócia de Escritório Contábil · Curitiba/PR</div>
+            <span class="testimonial-result">↑ 4h/semana recuperadas</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p class="testimonials-disclaimer">* Depoimentos representam resultados reais de clientes. Resultados individuais podem variar conforme o segmento e a implementação escolhida.</p>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section id="final-cta">
+  <div class="final-cta-inner">
+    <span class="section-label" style="display:block;text-align:center;margin-bottom:16px">Vamos Começar?</span>
+    <h2 class="final-cta-title">Pronto Para Levar Sua Empresa ao Próximo Nível?</h2>
+    <ul class="cta-points">
+      <li><i class="fas fa-check-circle"></i> Diagnóstico inicial gratuito e sem compromisso</li>
+      <li><i class="fas fa-check-circle"></i> Implementações adaptadas ao seu tipo de negócio</li>
+      <li><i class="fas fa-check-circle"></i> Suporte e acompanhamento em toda a implementação</li>
+    </ul>
+    <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Quero%20saber%20como%20a%20MHF%20Partners%20pode%20ajudar%20o%20meu%20negócio." target="_blank" class="btn-primary" style="font-size:1rem;padding:16px 32px">
+      <i class="fab fa-whatsapp"></i> Falar com a MHF Partners no WhatsApp
+    </a>
+    <p class="final-trust">Especialistas em IA e automação para empresas de todos os segmentos.</p>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <span class="section-label">Dúvidas</span>
+      <h2 class="section-title">Perguntas Frequentes</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">O que é a MHF Partners?<i class="fas fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>Somos uma consultoria especializada em implementação de Inteligência Artificial e automações para empresas. Atuamos com um catálogo de 19 soluções técnicas, empacotadas em três planos de serviço — Essencial, Crescimento e Escala — adaptados ao estágio e tipo de cada negócio.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Para que tipo de empresa vocês atendem?<i class="fas fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>Atendemos empresas de qualquer segmento — clínicas, escritórios, comércios, prestadores de serviço, agências, e muito mais. O que importa é que o negócio queira crescer com mais eficiência, eliminando trabalho manual e automatizando processos.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Preciso ter conhecimento técnico para usar as soluções?<i class="fas fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>Não. Nossa entrega inclui a implementação completa, configuração e treinamento. Você não precisa entender de tecnologia — cuidamos de tudo do início ao fim.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Quanto tempo leva para implementar?<i class="fas fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>Depende do plano e das implementações escolhidas. Soluções pontuais podem ser entregues em poucos dias. Pacotes completos seguem um cronograma definido na contratação, sempre com acompanhamento próximo em cada etapa.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Vocês atendem fora de Campo Grande?<i class="fas fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>Sim. Apesar de sermos sediados em Campo Grande/MS, atendemos empresas em todo o Brasil de forma 100% remota. As implementações são digitais e não exigem presença física.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Como funciona o início do trabalho?<i class="fas fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>O primeiro passo é uma conversa pelo WhatsApp para entender o momento do seu negócio e identificar quais implementações fazem mais sentido. Esse diagnóstico inicial é gratuito e sem compromisso.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">MHF<span>.</span>Partners</div>
+      <p class="footer-desc">Consultoria em IA e automações para empresas que querem crescer com eficiência e inteligência.</p>
+      <p class="footer-info">CNPJ: [INSERIR CNPJ]<br>Campo Grande, Mato Grosso do Sul — Brasil</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navegação</div>
+      <ul class="footer-links">
+        <li><a href="#hero">Início</a></li>
+        <li><a href="#how">Como Funciona</a></li>
+        <li><a href="#tiers">Planos e Soluções</a></li>
+        <li><a href="#implementations">Implementações</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="https://wa.me/55INSERIR_NUMERO" target="_blank">Falar com a MHF Partners</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Institucional</div>
+      <ul class="footer-links">
+        <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
+        <li><a href="/termos-de-uso">Termos de Uso</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Social</div>
+      <div class="social-icons">
+        <a href="https://instagram.com/INSERIR_USUARIO" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com/company/INSERIR_USUARIO" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://wa.me/55INSERIR_NUMERO" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 MHF Partners. Todos os direitos reservados.</p></div>
+</footer>
+
+<!-- ── FLOATING WHATSAPP ── -->
+<div id="float-wa">
+  <span class="float-wa-label">Fale conosco agora</span>
+  <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Vim%20pelo%20site%20da%20MHF%20Partners." target="_blank" class="float-wa-bubble">
+    <div class="float-wa-ping"></div>
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+
+<!-- ── EXIT INTENT POPUP ── -->
+<div id="exit-popup">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup()"><i class="fas fa-times"></i></button>
+    <span class="popup-emoji">🤖</span>
+    <h3 class="popup-title">Antes de você ir...</h3>
+    <p class="popup-subtitle">Que tal uma análise gratuita de <strong style="color:var(--accent)">o que dá pra automatizar</strong> no seu negócio? Em 30 minutos identificamos onde você está perdendo tempo e dinheiro.</p>
+    <div class="popup-form">
+      <input class="popup-input" type="text" placeholder="Seu nome" id="popup-name" />
+      <input class="popup-input" type="tel" placeholder="Seu WhatsApp (com DDD)" id="popup-phone" />
+      <a href="#" class="popup-btn" id="popup-cta" onclick="sendPopupLead(event)">
+        <i class="fab fa-whatsapp"></i> Quero Minha Análise Gratuita
+      </a>
+    </div>
+    <p class="popup-skip" onclick="closePopup()">Não, obrigado — prefiro continuar perdendo tempo no operacional.</p>
+  </div>
+</div>
+
+<script>
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Exit intent popup
+  let popupShown = false;
+  let popupTimer = null;
+
+  function showPopup() {
+    if (!popupShown) {
+      popupShown = true;
+      document.getElementById('exit-popup').classList.add('active');
+    }
+  }
+
+  function closePopup() {
+    document.getElementById('exit-popup').classList.remove('active');
+  }
+
+  // Desktop: mouse leaves window
+  document.addEventListener('mouseleave', (e) => {
+    if (e.clientY <= 0) showPopup();
+  });
+
+  // Mobile: show after 60s on page
+  popupTimer = setTimeout(() => {
+    if (!popupShown) showPopup();
+  }, 60000);
+
+  // Close popup on backdrop click
+  document.getElementById('exit-popup').addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
+  });
+
+  // Popup send — build WhatsApp link from form
+  function sendPopupLead(e) {
+    e.preventDefault();
+    const name = document.getElementById('popup-name').value.trim() || 'visitante';
+    const phone = document.getElementById('popup-phone').value.trim();
+    const msg = encodeURIComponent(`Olá! Meu nome é ${name} e quero a análise gratuita da MHF Partners. Meu WhatsApp: ${phone}`);
+    window.open(`https://wa.me/55INSERIR_NUMERO?text=${msg}`, '_blank');
+    closePopup();
+  }
+</script>
+</body>
+</html>

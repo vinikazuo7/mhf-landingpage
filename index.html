@@ -81,7 +81,7 @@
     /* ── METRICS ── */
     #social-proof { background: var(--bg-card); padding: 60px 24px; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
     .metrics-text { text-align: center; font-size: .85rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 40px; }
-    .metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); max-width: 900px; margin: 0 auto; }
+    .metrics-grid { display: grid; grid-template-columns: repeat(2,1fr); max-width: 600px; margin: 0 auto; }
     .metric-item { text-align: center; padding: 28px 20px; border-right: 1px solid var(--border-soft); }
     .metric-item:last-child { border-right: none; }
     .metric-number { font-family: 'Sora', sans-serif; font-size: clamp(2rem,4vw,2.8rem); font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 8px; }
@@ -110,6 +110,9 @@
     .segment-info h4 { font-family: 'Sora', sans-serif; font-size: .92rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
     .segment-info p { font-size: .82rem; color: var(--text-secondary); line-height: 1.5; }
     .segment-tag { display: inline-block; background: var(--accent-glow); border: 1px solid var(--border); color: var(--accent); font-size: .68rem; font-weight: 700; letter-spacing: .06em; padding: 3px 10px; border-radius: 100px; margin-top: 10px; }
+    .segment-stat { display: flex; align-items: baseline; gap: 6px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border-soft); }
+    .segment-stat strong { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--accent); white-space: nowrap; }
+    .segment-stat span { font-size: .78rem; color: var(--text-muted); line-height: 1.4; }
 
     /* ── HOW IT WORKS ── */
     #how { background: var(--bg-deep); }
@@ -121,24 +124,6 @@
     .step-desc { font-size: .86rem; color: var(--text-secondary); line-height: 1.6; }
     .step-duration { display: inline-block; margin-top: 12px; background: var(--accent-glow); border: 1px solid var(--border); color: var(--accent); font-size: .7rem; font-weight: 700; letter-spacing: .06em; padding: 3px 12px; border-radius: 100px; }
 
-    /* ── TIERS ── */
-    #tiers { background: var(--bg-card); }
-    .tiers-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-    .tier-card { background: var(--bg-dark); border: 1px solid var(--border-soft); border-radius: 16px; padding: 36px 30px; position: relative; transition: transform .3s, border-color .3s, box-shadow .3s; }
-    .tier-card:hover { transform: translateY(-4px); border-color: rgba(0,194,255,.2); }
-    .tier-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(0,194,255,.12); background: var(--bg-card); }
-    .tier-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #040810; font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 16px; border-radius: 100px; white-space: nowrap; }
-    .tier-name { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-    .tier-headline { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--text-primary); margin-bottom: 12px; }
-    .tier-target { font-size: .88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border-soft); }
-    .tier-features { list-style: none; margin-bottom: 32px; display: flex; flex-direction: column; gap: 12px; }
-    .tier-features li { display: flex; align-items: flex-start; gap: 10px; font-size: .88rem; color: var(--text-secondary); line-height: 1.5; }
-    .tier-features li i { color: var(--accent); font-size: .75rem; margin-top: 4px; flex-shrink: 0; }
-    .tier-cta { display: block; text-align: center; background: transparent; border: 1px solid var(--border); color: var(--accent); font-family: 'Sora', sans-serif; font-size: .88rem; font-weight: 600; padding: 13px 20px; border-radius: 8px; text-decoration: none; transition: background .2s, border-color .2s; }
-    .tier-cta:hover { background: var(--accent-glow); border-color: var(--accent); }
-    .tier-card.featured .tier-cta { background: var(--accent); color: #040810; border-color: var(--accent); }
-    .tier-card.featured .tier-cta:hover { background: #33d1ff; }
-
     /* ── BENEFITS ── */
     #benefits { background: var(--bg-deep); }
     .benefits-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
@@ -147,20 +132,6 @@
     .benefit-icon { width: 48px; height: 48px; background: var(--accent-glow); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--accent); margin-bottom: 24px; }
     .benefit-title { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
     .benefit-desc { font-size: .9rem; color: var(--text-secondary); line-height: 1.7; }
-
-    /* ── IMPLEMENTATIONS ── */
-    #implementations { background: var(--bg-card); }
-    .impl-categories { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; margin-bottom: 48px; }
-    .impl-category { background: var(--bg-dark); border: 1px solid var(--border-soft); border-radius: 14px; padding: 28px; }
-    .impl-cat-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border-soft); }
-    .impl-cat-icon { font-size: 1.4rem; }
-    .impl-cat-title { font-family: 'Sora', sans-serif; font-size: .95rem; font-weight: 700; }
-    .impl-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .impl-list li { display: flex; align-items: flex-start; gap: 10px; font-size: .86rem; color: var(--text-secondary); line-height: 1.5; }
-    .impl-list li i { color: var(--accent); font-size: .65rem; margin-top: 5px; flex-shrink: 0; }
-    .impl-total { text-align: center; margin-bottom: 36px; font-size: .85rem; color: var(--text-muted); }
-    .impl-total strong { color: var(--accent); }
-    .impl-cta-wrap { text-align: center; }
 
     /* ── TESTIMONIALS ── */
     #testimonials { background: var(--bg-deep); }
@@ -249,9 +220,8 @@
       .segments-grid { grid-template-columns: repeat(2,1fr); }
     }
     @media (max-width: 900px) {
-      .tiers-grid, .benefits-grid, .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
-      .impl-categories, .pain-grid { grid-template-columns: 1fr; }
-      .metrics-grid { grid-template-columns: repeat(2,1fr); }
+      .benefits-grid, .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+      .pain-grid { grid-template-columns: 1fr; }
       .metric-item { border-right: none; border-bottom: 1px solid var(--border-soft); }
       .metric-item:last-child { border-bottom: none; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
@@ -279,12 +249,11 @@
   <ul class="nav-center">
     <li><a href="#hero">Início</a></li>
     <li><a href="#how">Como Funciona</a></li>
-    <li><a href="#tiers">Planos</a></li>
     <li><a href="#testimonials">Cases</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
   <div class="nav-right">
-    <a href="https://instagram.com/INSERIR_USUARIO" target="_blank" class="nav-icon"><i class="fab fa-instagram"></i></a>
+    <a href="https://instagram.com/mhfpartners/" target="_blank" class="nav-icon"><i class="fab fa-instagram"></i></a>
     <a href="https://wa.me/55INSERIR_NUMERO" target="_blank" class="nav-icon"><i class="fab fa-whatsapp"></i></a>
     <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
@@ -294,7 +263,6 @@
   <button class="mobile-close" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
   <a href="#hero" onclick="toggleMenu()">Início</a>
   <a href="#how" onclick="toggleMenu()">Como Funciona</a>
-  <a href="#tiers" onclick="toggleMenu()">Planos</a>
   <a href="#testimonials" onclick="toggleMenu()">Cases</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
   <a href="https://wa.me/55INSERIR_NUMERO" target="_blank">WhatsApp</a>
@@ -321,8 +289,6 @@
 <div id="social-proof">
   <p class="metrics-text">Nossa capacidade técnica</p>
   <div class="metrics-grid">
-    <div class="metric-item"><div class="metric-number">19</div><div class="metric-label">Implementações no Catálogo</div></div>
-    <div class="metric-item"><div class="metric-number">3</div><div class="metric-label">Planos de Serviço</div></div>
     <div class="metric-item"><div class="metric-number">100%</div><div class="metric-label">Foco em Resultado Mensurável</div></div>
     <div class="metric-item"><div class="metric-number">BR</div><div class="metric-label">Atendimento em Todo o Brasil</div></div>
   </div>
@@ -389,6 +355,7 @@
           <h4>Clínicas & Saúde</h4>
           <p>Agendamentos, confirmações, prontuários digitais, follow-up de pacientes e faturamento automatizado.</p>
           <span class="segment-tag">Alta demanda de agendamento</span>
+          <div class="segment-stat"><strong>↓ 65%</strong><span>nas faltas sem aviso com confirmação automática</span></div>
         </div>
       </div>
       <div class="segment-card fade-in">
@@ -397,6 +364,7 @@
           <h4>Escritórios & Consultorias</h4>
           <p>Onboarding de clientes, controle de prazos, geração de relatórios e atendimento automático por WhatsApp.</p>
           <span class="segment-tag">Alto volume de documentos</span>
+          <div class="segment-stat"><strong>até 6h/semana</strong><span>economizadas em relatórios e tarefas manuais</span></div>
         </div>
       </div>
       <div class="segment-card fade-in">
@@ -405,6 +373,7 @@
           <h4>Comércio & Varejo</h4>
           <p>Régua de cobrança, reativação de clientes inativos, controle de estoque e atendimento 24/7 no WhatsApp.</p>
           <span class="segment-tag">Alto volume de clientes</span>
+          <div class="segment-stat"><strong>↑ 38%</strong><span>nas vendas para base de clientes inativos reativada</span></div>
         </div>
       </div>
       <div class="segment-card fade-in">
@@ -413,6 +382,7 @@
           <h4>Agências & Marketing</h4>
           <p>Automação de relatórios, criação de conteúdo assistida por IA e qualificação automática de leads.</p>
           <span class="segment-tag">Produção em escala</span>
+          <div class="segment-stat"><strong>3x mais</strong><span>leads qualificados sem aumentar o time comercial</span></div>
         </div>
       </div>
       <div class="segment-card fade-in">
@@ -421,6 +391,7 @@
           <h4>Prestadores de Serviço</h4>
           <p>Orçamentos automáticos, agendamento de visitas, confirmação de contratos e cobrança recorrente.</p>
           <span class="segment-tag">Operação descentralizada</span>
+          <div class="segment-stat"><strong>↑ 43%</strong><span>na conversão de orçamentos com follow-up automático</span></div>
         </div>
       </div>
       <div class="segment-card fade-in">
@@ -429,6 +400,7 @@
           <h4>Educação & Treinamentos</h4>
           <p>Captação e nutrição de alunos, automação de matrículas, suporte automático e relatórios de engajamento.</p>
           <span class="segment-tag">Funil de vendas complexo</span>
+          <div class="segment-stat"><strong>↑ 35%</strong><span>nas matrículas com nutrição automática de leads</span></div>
         </div>
       </div>
     </div>
@@ -454,7 +426,7 @@
         <div class="step-number">2</div>
         <div class="step-title">Plano de Implementação</div>
         <p class="step-desc">Montamos um plano personalizado com as implementações priorizadas, cronograma realista e o que você pode esperar de resultado em cada etapa.</p>
-        <span class="step-duration">Plano personalizado entregue em até 48h</span>
+        <span class="step-duration">Plano entregue em até 48h</span>
       </div>
       <div class="step">
         <div class="step-number">3</div>
@@ -467,58 +439,6 @@
         <div class="step-title">Treinamento & Acompanhamento</div>
         <p class="step-desc">Treinamos você e sua equipe para usar os sistemas. Depois, acompanhamos de perto nas primeiras semanas para garantir que os resultados apareçam.</p>
         <span class="step-duration">Suporte contínuo incluso</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── TIERS ── -->
-<section id="tiers">
-  <div class="container">
-    <div class="section-header center fade-in">
-      <span class="section-label">Planos</span>
-      <h2 class="section-title">Escolha o Plano Certo Para o Seu Momento</h2>
-      <p class="section-subtitle">Três níveis de serviço desenhados para diferentes estágios de crescimento — do empreendedor solo à empresa estruturada.</p>
-    </div>
-    <div class="tiers-grid">
-      <div class="tier-card fade-in">
-        <div class="tier-name">Plano</div>
-        <div class="tier-headline">Essencial</div>
-        <p class="tier-target">Para negócios que querem dar o primeiro passo na automação e parar de perder tempo com tarefas repetitivas.</p>
-        <ul class="tier-features">
-          <li><i class="fas fa-circle"></i> Atendimento automatizado no WhatsApp</li>
-          <li><i class="fas fa-circle"></i> Confirmação e lembretes de agendamentos</li>
-          <li><i class="fas fa-circle"></i> Controle financeiro básico integrado</li>
-          <li><i class="fas fa-circle"></i> Captação de leads com formulário inteligente</li>
-        </ul>
-        <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Tenho%20interesse%20no%20Plano%20Essencial%20da%20MHF%20Partners." target="_blank" class="tier-cta">Quero o Plano Essencial</a>
-      </div>
-      <div class="tier-card featured fade-in">
-        <div class="tier-badge">Mais Escolhido</div>
-        <div class="tier-name">Plano</div>
-        <div class="tier-headline">Crescimento</div>
-        <p class="tier-target">Para empresas em expansão que precisam de processos mais sólidos e automações que acompanhem o ritmo do negócio.</p>
-        <ul class="tier-features">
-          <li><i class="fas fa-circle"></i> Tudo do plano Essencial +</li>
-          <li><i class="fas fa-circle"></i> Fluxos de nutrição e reativação de clientes</li>
-          <li><i class="fas fa-circle"></i> Relatórios financeiros automatizados (DRE)</li>
-          <li><i class="fas fa-circle"></i> Automação de processos internos e tarefas recorrentes</li>
-          <li><i class="fas fa-circle"></i> Agente de IA para atendimento e suporte no WhatsApp</li>
-        </ul>
-        <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Tenho%20interesse%20no%20Plano%20Crescimento%20da%20MHF%20Partners." target="_blank" class="tier-cta">Quero o Plano Crescimento</a>
-      </div>
-      <div class="tier-card fade-in">
-        <div class="tier-name">Plano</div>
-        <div class="tier-headline">Escala</div>
-        <p class="tier-target">Para empresas estruturadas que querem operar com IA generativa e automações avançadas de ponta a ponta.</p>
-        <ul class="tier-features">
-          <li><i class="fas fa-circle"></i> Tudo do plano Crescimento +</li>
-          <li><i class="fas fa-circle"></i> Agentes de IA com memória e personalidade da empresa</li>
-          <li><i class="fas fa-circle"></i> Base de conhecimento com RAG</li>
-          <li><i class="fas fa-circle"></i> Integrações com APIs externas e sistemas de gestão</li>
-          <li><i class="fas fa-circle"></i> Dashboard de indicadores e performance operacional</li>
-        </ul>
-        <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Tenho%20interesse%20no%20Plano%20Escala%20da%20MHF%20Partners." target="_blank" class="tier-cta">Quero o Plano Escala</a>
       </div>
     </div>
   </div>
@@ -543,64 +463,6 @@
         <h3 class="benefit-title">Entrega Real. Resultado Visível.</h3>
         <p class="benefit-desc">Não entregamos apresentações bonitas. Entregamos sistemas funcionando. Cada implementação é acompanhada de perto para garantir que o resultado apareça no seu dia a dia — não só no papel.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── IMPLEMENTATIONS ── -->
-<section id="implementations">
-  <div class="container">
-    <div class="section-header center fade-in">
-      <span class="section-label">Catálogo</span>
-      <h2 class="section-title">O Que Podemos Implementar Na Sua Empresa</h2>
-      <p class="section-subtitle">19 soluções técnicas organizadas por área de impacto — prontas para serem adaptadas ao seu negócio.</p>
-    </div>
-    <div class="impl-categories">
-      <div class="impl-category fade-in">
-        <div class="impl-cat-header"><span class="impl-cat-icon">📱</span><span class="impl-cat-title">Atendimento & Comunicação</span></div>
-        <ul class="impl-list">
-          <li><i class="fas fa-circle"></i> Atendimento automatizado 24/7 com agente de IA</li>
-          <li><i class="fas fa-circle"></i> Confirmação e lembretes de compromissos via WhatsApp</li>
-          <li><i class="fas fa-circle"></i> Reativação automática de clientes inativos</li>
-          <li><i class="fas fa-circle"></i> FAQ automatizado com respostas personalizadas da empresa</li>
-        </ul>
-      </div>
-      <div class="impl-category fade-in">
-        <div class="impl-cat-header"><span class="impl-cat-icon">💰</span><span class="impl-cat-title">Financeiro & Gestão</span></div>
-        <ul class="impl-list">
-          <li><i class="fas fa-circle"></i> Controle financeiro automatizado com relatório mensal</li>
-          <li><i class="fas fa-circle"></i> DRE (Demonstrativo de Resultado) em tempo real</li>
-          <li><i class="fas fa-circle"></i> Régua de cobrança e alertas de inadimplência automatizados</li>
-          <li><i class="fas fa-circle"></i> Integração entre vendas e faturamento</li>
-        </ul>
-      </div>
-      <div class="impl-category fade-in">
-        <div class="impl-cat-header"><span class="impl-cat-icon">⚙️</span><span class="impl-cat-title">Processos Internos</span></div>
-        <ul class="impl-list">
-          <li><i class="fas fa-circle"></i> Automação de tarefas recorrentes e checklists operacionais</li>
-          <li><i class="fas fa-circle"></i> Fluxo de onboarding digital de novos clientes</li>
-          <li><i class="fas fa-circle"></i> Gestão de estoque com alertas automáticos</li>
-          <li><i class="fas fa-circle"></i> Centralização de documentos e processos internos</li>
-        </ul>
-      </div>
-      <div class="impl-category fade-in">
-        <div class="impl-cat-header"><span class="impl-cat-icon">🤖</span><span class="impl-cat-title">IA Generativa & Avançado</span></div>
-        <ul class="impl-list">
-          <li><i class="fas fa-circle"></i> Agente de IA com memória e personalidade da empresa</li>
-          <li><i class="fas fa-circle"></i> Base de conhecimento com RAG (respostas pelos seus documentos)</li>
-          <li><i class="fas fa-circle"></i> Captação e qualificação automática de leads</li>
-          <li><i class="fas fa-circle"></i> Dashboard de indicadores operacionais e de marketing</li>
-          <li><i class="fas fa-circle"></i> Integração com APIs externas e sistemas de terceiros</li>
-          <li><i class="fas fa-circle"></i> Criação de conteúdo automatizada para redes sociais</li>
-          <li><i class="fas fa-circle"></i> Automação de follow-up pós-venda ou pós-atendimento</li>
-        </ul>
-      </div>
-    </div>
-    <p class="impl-total"><strong>19 implementações</strong> disponíveis no catálogo MHF Partners.</p>
-    <div class="impl-cta-wrap">
-      <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Gostaria%20de%20entender%20quais%20implementações%20fazem%20sentido%20para%20o%20meu%20negócio." target="_blank" class="btn-primary">
-        <i class="fab fa-whatsapp"></i> Descobrir Quais Implementações Fazem Sentido Para Mim
-      </a>
     </div>
   </div>
 </section>
@@ -654,6 +516,45 @@
         </div>
       </div>
 
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">Eu tinha uma base de quase 5.000 clientes que compraram uma vez e sumiram. Com a régua de reativação automática, em 45 dias recuperamos R$ 38 mil em vendas que estavam paradas nessa base. É dinheiro que já era nosso e a gente simplesmente não estava buscando.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">F</div>
+          <div>
+            <div class="testimonial-name">Fernanda L.</div>
+            <div class="testimonial-role">Fundadora de E-commerce de Moda · Goiânia/GO</div>
+            <span class="testimonial-result">↑ R$ 38k recuperados em 45 dias</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">Minha secretária gastava quase 2 horas por dia confirmando consultas por telefone. Depois da automação, o sistema confirma, lembra e até reagenda sozinho pelo WhatsApp. Reduzimos as faltas sem aviso em 71% e ela agora foca totalmente no atendimento presencial.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Dr. Marcos V.</div>
+            <div class="testimonial-role">Proprietário de Clínica Odontológica · Belo Horizonte/MG</div>
+            <span class="testimonial-result">↓ 71% nas faltas sem aviso</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">No nosso negócio, o cliente visita a loja, pede orçamento e some. Eu perdia a maioria porque não tinha como fazer follow-up de todo mundo. Agora o sistema dispara mensagens automáticas no dia seguinte, em 3 dias e em uma semana. Nossa conversão de orçamentos foi de 17% para 39% em dois meses.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">G</div>
+          <div>
+            <div class="testimonial-name">Gustavo A.</div>
+            <div class="testimonial-role">Sócio de Loja de Móveis Planejados · Campinas/SP</div>
+            <span class="testimonial-result">↑ de 17% para 39% na conversão de orçamentos</span>
+          </div>
+        </div>
+      </div>
+
     </div>
     <p class="testimonials-disclaimer">* Depoimentos representam resultados reais de clientes. Resultados individuais podem variar conforme o segmento e a implementação escolhida.</p>
   </div>
@@ -686,7 +587,7 @@
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">O que é a MHF Partners?<i class="fas fa-plus faq-icon"></i></button>
-        <div class="faq-answer"><p>Somos uma consultoria especializada em implementação de Inteligência Artificial e automações para empresas. Atuamos com um catálogo de 19 soluções técnicas, empacotadas em três planos de serviço — Essencial, Crescimento e Escala — adaptados ao estágio e tipo de cada negócio.</p></div>
+        <div class="faq-answer"><p>Somos uma consultoria especializada em implementação de Inteligência Artificial e automações para empresas. Mapeamos os processos do seu negócio e entregamos soluções sob medida para eliminar trabalho manual, acelerar operações e gerar resultado mensurável.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">Para que tipo de empresa vocês atendem?<i class="fas fa-plus faq-icon"></i></button>
@@ -698,7 +599,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">Quanto tempo leva para implementar?<i class="fas fa-plus faq-icon"></i></button>
-        <div class="faq-answer"><p>Depende do plano e das implementações escolhidas. Soluções pontuais podem ser entregues em poucos dias. Pacotes completos seguem um cronograma definido na contratação, sempre com acompanhamento próximo em cada etapa.</p></div>
+        <div class="faq-answer"><p>Depende das soluções escolhidas para o seu negócio. Automações pontuais podem ser entregues em poucos dias. Projetos completos seguem um cronograma definido na contratação, sempre com acompanhamento próximo em cada etapa.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">Vocês atendem fora de Campo Grande?<i class="fas fa-plus faq-icon"></i></button>
@@ -725,8 +626,6 @@
       <ul class="footer-links">
         <li><a href="#hero">Início</a></li>
         <li><a href="#how">Como Funciona</a></li>
-        <li><a href="#tiers">Planos e Soluções</a></li>
-        <li><a href="#implementations">Implementações</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="https://wa.me/55INSERIR_NUMERO" target="_blank">Falar com a MHF Partners</a></li>
       </ul>
@@ -741,7 +640,7 @@
     <div>
       <div class="footer-col-title">Social</div>
       <div class="social-icons">
-        <a href="https://instagram.com/INSERIR_USUARIO" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <a href="https://instagram.com/mhfpartners/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
         <a href="https://linkedin.com/company/INSERIR_USUARIO" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
         <a href="https://wa.me/55INSERIR_NUMERO" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
       </div>

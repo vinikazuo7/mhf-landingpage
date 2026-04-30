@@ -104,15 +104,16 @@
     /* ── SEGMENTS ── */
     #segments { background: var(--bg-card); }
     .segments-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-    .segment-card { background: var(--bg-dark); border: 1px solid var(--border-soft); border-radius: 12px; padding: 28px 24px; display: flex; align-items: flex-start; gap: 16px; transition: border-color .3s, transform .3s; cursor: default; }
+    .segment-card { background: var(--bg-dark); border: 1px solid var(--border-soft); border-radius: 12px; padding: 28px 24px; transition: border-color .3s, transform .3s; cursor: default; }
     .segment-card:hover { border-color: var(--border); transform: translateY(-3px); }
-    .segment-emoji { font-size: 1.8rem; flex-shrink: 0; margin-top: 2px; }
-    .segment-info h4 { font-family: 'Sora', sans-serif; font-size: .92rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .segment-emoji { font-size: 1rem; }
+    .segment-info { text-align: center; }
+    .segment-info h4 { font-family: 'Sora', sans-serif; font-size: .92rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 7px; }
     .segment-info p { font-size: .82rem; color: var(--text-secondary); line-height: 1.5; }
     .segment-tag { display: inline-block; background: var(--accent-glow); border: 1px solid var(--border); color: var(--accent); font-size: .68rem; font-weight: 700; letter-spacing: .06em; padding: 3px 10px; border-radius: 100px; margin-top: 10px; }
-    .segment-stat { display: flex; align-items: baseline; gap: 6px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border-soft); }
-    .segment-stat strong { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--accent); white-space: nowrap; }
-    .segment-stat span { font-size: .78rem; color: var(--text-muted); line-height: 1.4; }
+    .segment-stat { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border-soft); text-align: center; }
+    .segment-stat strong { display: block; font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--accent); margin-bottom: 3px; }
+    .segment-stat span { display: block; font-size: .78rem; color: var(--text-muted); line-height: 1.4; }
 
     /* ── HOW IT WORKS ── */
     #how { background: var(--bg-deep); }
@@ -125,7 +126,7 @@
     .step-duration { display: inline-block; margin-top: 12px; background: var(--accent-glow); border: 1px solid var(--border); color: var(--accent); font-size: .7rem; font-weight: 700; letter-spacing: .06em; padding: 3px 12px; border-radius: 100px; }
 
     /* ── BENEFITS ── */
-    #benefits { background: var(--bg-deep); }
+    #benefits { background: var(--bg-card); }
     .benefits-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
     .benefit-card { background: var(--bg-card); border: 1px solid var(--border-soft); border-radius: 14px; padding: 36px 28px; transition: border-color .3s, transform .3s; }
     .benefit-card:hover { border-color: rgba(0,194,255,.25); transform: translateY(-3px); }
@@ -239,6 +240,80 @@
       #float-wa { bottom: 20px; right: 20px; }
       .float-wa-bubble { width: 54px; height: 54px; font-size: 1.4rem; }
     }
+
+    /* ── QUIZ CHAT ── */
+    #quiz-popup { display: none; position: fixed; inset: 0; z-index: 2000; align-items: center; justify-content: center; background: rgba(4,8,16,.88); backdrop-filter: blur(10px); padding: 16px; }
+    #quiz-popup.active { display: flex; }
+    .quiz-container { width: 100%; max-width: 480px; height: 88vh; max-height: 700px; background: var(--bg-dark); border: 1px solid var(--border-soft); border-radius: 20px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,.6); animation: popIn .3s ease; }
+    .quiz-header { display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: var(--bg-card); border-bottom: 1px solid var(--border-soft); flex-shrink: 0; }
+    /* Avatar: swap .quiz-avatar-initials for <img class="quiz-avatar-img"> to use a photo */
+    .quiz-avatar-wrap { position: relative; flex-shrink: 0; }
+    .quiz-avatar-initials { width: 42px; height: 42px; border-radius: 50%; background: var(--accent-glow); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: .68rem; font-weight: 800; color: var(--accent); letter-spacing: .04em; }
+    .quiz-avatar-img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); display: block; }
+    .quiz-avatar-dot { position: absolute; bottom: 1px; right: 1px; width: 10px; height: 10px; background: var(--green); border-radius: 50%; border: 2px solid var(--bg-card); }
+    .quiz-header-info { flex: 1; }
+    .quiz-header-name { display: block; font-family: 'Sora', sans-serif; font-size: .88rem; font-weight: 700; color: var(--text-primary); }
+    .quiz-header-sub { display: block; font-size: .7rem; color: var(--green); margin-top: 1px; }
+    .quiz-close { background: none; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; padding: 4px; transition: color .2s; flex-shrink: 0; }
+    .quiz-close:hover { color: var(--text-primary); }
+    .quiz-prog-bar { height: 3px; background: var(--border-soft); flex-shrink: 0; }
+    .quiz-prog-fill { height: 100%; background: var(--accent); transition: width .5s ease; width: 0%; }
+    .quiz-messages { flex: 1; overflow-y: auto; padding: 20px 16px; display: flex; flex-direction: column; gap: 14px; }
+    .quiz-messages::-webkit-scrollbar { width: 4px; }
+    .quiz-messages::-webkit-scrollbar-thumb { background: var(--border-soft); border-radius: 4px; }
+    .quiz-msg { display: flex; gap: 8px; max-width: 86%; animation: msgIn .3s ease; }
+    @keyframes msgIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+    .quiz-msg.bot { align-self: flex-start; }
+    .quiz-msg.user { align-self: flex-end; flex-direction: row-reverse; max-width: 72%; }
+    .quiz-msg-av { width: 30px; height: 30px; border-radius: 50%; background: var(--accent-glow); border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: .58rem; font-weight: 800; color: var(--accent); flex-shrink: 0; margin-top: 2px; overflow: hidden; }
+    .quiz-msg-av img { width: 100%; height: 100%; object-fit: cover; }
+    .quiz-msg-bubble { padding: 11px 14px; border-radius: 16px; font-size: .875rem; line-height: 1.65; }
+    .quiz-msg.bot .quiz-msg-bubble { background: var(--bg-card); border: 1px solid var(--border-soft); color: var(--text-secondary); border-radius: 4px 16px 16px 16px; }
+    .quiz-msg.user .quiz-msg-bubble { background: var(--accent); color: #040810; font-weight: 600; border-radius: 16px 4px 16px 16px; }
+    .quiz-typing { display: flex; gap: 8px; align-self: flex-start; animation: msgIn .3s ease; }
+    .quiz-typing-bubble { background: var(--bg-card); border: 1px solid var(--border-soft); padding: 12px 16px; border-radius: 4px 16px 16px 16px; display: flex; gap: 5px; align-items: center; }
+    .quiz-typing-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted); animation: typingDot 1.2s ease-in-out infinite; }
+    .quiz-typing-dot:nth-child(2) { animation-delay: .2s; }
+    .quiz-typing-dot:nth-child(3) { animation-delay: .4s; }
+    @keyframes typingDot { 0%,60%,100%{transform:translateY(0);opacity:.4;} 30%{transform:translateY(-5px);opacity:1;} }
+    .quiz-input-area { padding: 14px 16px 18px; background: var(--bg-card); border-top: 1px solid var(--border-soft); flex-shrink: 0; }
+    .quiz-input-label { font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 7px; display: block; }
+    .quiz-input-row { display: flex; align-items: center; gap: 8px; background: var(--bg-dark); border: 1px solid var(--border-soft); border-radius: 100px; padding: 8px 8px 8px 16px; transition: border-color .2s; }
+    .quiz-input-row:focus-within { border-color: var(--accent); }
+    .quiz-field { flex: 1; background: none; border: none; outline: none; color: var(--text-primary); font-family: 'DM Sans', sans-serif; font-size: .9rem; min-width: 0; }
+    .quiz-field::placeholder { color: var(--text-muted); }
+    .quiz-send-btn { width: 34px; height: 34px; border-radius: 50%; background: var(--accent); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #040810; font-size: .8rem; flex-shrink: 0; transition: background .2s, transform .2s; }
+    .quiz-send-btn:hover { background: #33d1ff; transform: scale(1.08); }
+    .quiz-phone-code { font-size: .85rem; color: var(--text-secondary); font-weight: 600; white-space: nowrap; border-right: 1px solid var(--border-soft); padding-right: 10px; margin-right: 2px; }
+    .quiz-privacy { font-size: .7rem; color: var(--text-muted); margin-top: 8px; line-height: 1.5; text-align: center; }
+    .quiz-privacy a { color: var(--accent); text-decoration: none; }
+    .quiz-field-error { font-size: .72rem; color: var(--red); margin-top: 6px; min-height: 16px; }
+    .quiz-select-wrap { position: relative; margin-bottom: 10px; }
+    .quiz-select { width: 100%; background: var(--bg-dark); border: 1px solid var(--border-soft); border-radius: 12px; padding: 13px 38px 13px 14px; color: var(--text-primary); font-family: 'DM Sans', sans-serif; font-size: .88rem; appearance: none; cursor: pointer; outline: none; transition: border-color .2s; }
+    .quiz-select:focus { border-color: var(--accent); }
+    .quiz-select option { background: var(--bg-dark); }
+    .quiz-select-chevron { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; font-size: .75rem; }
+    .quiz-confirm-btn { width: 100%; background: var(--accent); color: #040810; font-family: 'Sora', sans-serif; font-weight: 700; font-size: .88rem; padding: 12px; border-radius: 10px; border: none; cursor: pointer; transition: background .2s; }
+    .quiz-confirm-btn:hover { background: #33d1ff; }
+    .quiz-list { display: flex; flex-direction: column; gap: 6px; max-height: 240px; overflow-y: auto; }
+    .quiz-list::-webkit-scrollbar { width: 4px; }
+    .quiz-list::-webkit-scrollbar-thumb { background: var(--border-soft); border-radius: 4px; }
+    .quiz-list-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-dark); border: 1px solid var(--border-soft); border-radius: 10px; padding: 12px 14px; cursor: pointer; font-size: .875rem; color: var(--text-secondary); transition: border-color .2s, color .2s, background .2s; text-align: left; }
+    .quiz-list-item:hover { border-color: var(--accent); color: var(--text-primary); background: var(--accent-glow); }
+    .quiz-list-item i { font-size: .7rem; color: var(--text-muted); flex-shrink: 0; }
+    .quiz-list-item:hover i { color: var(--accent); }
+    .quiz-cal { background: var(--bg-deep); border: 1px solid var(--border-soft); border-radius: 14px; overflow: hidden; }
+    .quiz-cal-header { background: var(--bg-card); padding: 14px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border-soft); }
+    .quiz-cal-icon { color: var(--accent); font-size: 1rem; }
+    .quiz-cal-title { font-family: 'Sora', sans-serif; font-size: .88rem; font-weight: 700; color: var(--text-primary); }
+    .quiz-cal-sub { font-size: .72rem; color: var(--text-muted); margin-top: 2px; }
+    .quiz-cal-body { padding: 14px 16px; font-size: .82rem; color: var(--text-muted); line-height: 1.6; }
+    .quiz-cal-cta { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0 16px 16px; background: #25d366; color: #fff; font-family: 'Sora', sans-serif; font-weight: 700; font-size: .88rem; padding: 13px; border-radius: 10px; border: none; cursor: pointer; text-decoration: none; transition: background .2s; }
+    .quiz-cal-cta:hover { background: #1fba59; }
+    @media (max-width: 520px) {
+      #quiz-popup { padding: 0; }
+      .quiz-container { height: 100vh; max-height: 100vh; border-radius: 0; }
+    }
   </style>
 </head>
 <body>
@@ -254,7 +329,7 @@
   </ul>
   <div class="nav-right">
     <a href="https://instagram.com/mhfpartners/" target="_blank" class="nav-icon"><i class="fab fa-instagram"></i></a>
-    <a href="https://wa.me/55INSERIR_NUMERO" target="_blank" class="nav-icon"><i class="fab fa-whatsapp"></i></a>
+    <a href="#" onclick="openQuiz(event)" class="nav-icon"><i class="fab fa-whatsapp"></i></a>
     <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -265,7 +340,7 @@
   <a href="#how" onclick="toggleMenu()">Como Funciona</a>
   <a href="#testimonials" onclick="toggleMenu()">Cases</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
-  <a href="https://wa.me/55INSERIR_NUMERO" target="_blank">WhatsApp</a>
+  <a href="#" onclick="openQuiz(event); toggleMenu()">WhatsApp</a>
 </div>
 
 <!-- ── HERO ── -->
@@ -277,8 +352,8 @@
     <h1 class="hero-title">Sua Empresa Operando<br>no <em>Próximo Nível.</em></h1>
     <p class="hero-subtitle">A MHF Partners implementa Inteligência Artificial e automações sob medida para empresas que querem crescer sem aumentar custos — eliminando tarefas manuais, acelerando processos e gerando resultado mensurável.</p>
     <div class="hero-ctas">
-      <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20conhecer%20as%20soluções%20da%20MHF%20Partners." target="_blank" class="btn-primary">
-        <i class="fab fa-whatsapp"></i> Quero Conhecer as Soluções
+      <a href="#" class="btn-primary" onclick="openQuiz(event)">
+        Quero Conhecer
       </a>
       <a href="#how" class="btn-secondary">Como Funciona <i class="fas fa-arrow-down" style="font-size:.8rem"></i></a>
     </div>
@@ -350,54 +425,48 @@
     </div>
     <div class="segments-grid">
       <div class="segment-card fade-in">
-        <span class="segment-emoji">🏥</span>
         <div class="segment-info">
-          <h4>Clínicas & Saúde</h4>
+          <h4><span class="segment-emoji">🏥</span> Clínicas & Saúde</h4>
           <p>Agendamentos, confirmações, prontuários digitais, follow-up de pacientes e faturamento automatizado.</p>
           <span class="segment-tag">Alta demanda de agendamento</span>
           <div class="segment-stat"><strong>↓ 65%</strong><span>nas faltas sem aviso com confirmação automática</span></div>
         </div>
       </div>
       <div class="segment-card fade-in">
-        <span class="segment-emoji">⚖️</span>
         <div class="segment-info">
-          <h4>Escritórios & Consultorias</h4>
+          <h4><span class="segment-emoji">⚖️</span> Escritórios & Consultorias</h4>
           <p>Onboarding de clientes, controle de prazos, geração de relatórios e atendimento automático por WhatsApp.</p>
           <span class="segment-tag">Alto volume de documentos</span>
           <div class="segment-stat"><strong>até 6h/semana</strong><span>economizadas em relatórios e tarefas manuais</span></div>
         </div>
       </div>
       <div class="segment-card fade-in">
-        <span class="segment-emoji">🛒</span>
         <div class="segment-info">
-          <h4>Comércio & Varejo</h4>
+          <h4><span class="segment-emoji">🛒</span> Comércio & Varejo</h4>
           <p>Régua de cobrança, reativação de clientes inativos, controle de estoque e atendimento 24/7 no WhatsApp.</p>
           <span class="segment-tag">Alto volume de clientes</span>
           <div class="segment-stat"><strong>↑ 38%</strong><span>nas vendas para base de clientes inativos reativada</span></div>
         </div>
       </div>
       <div class="segment-card fade-in">
-        <span class="segment-emoji">📣</span>
         <div class="segment-info">
-          <h4>Agências & Marketing</h4>
+          <h4><span class="segment-emoji">📣</span> Agências & Marketing</h4>
           <p>Automação de relatórios, criação de conteúdo assistida por IA e qualificação automática de leads.</p>
           <span class="segment-tag">Produção em escala</span>
           <div class="segment-stat"><strong>3x mais</strong><span>leads qualificados sem aumentar o time comercial</span></div>
         </div>
       </div>
       <div class="segment-card fade-in">
-        <span class="segment-emoji">🏗️</span>
         <div class="segment-info">
-          <h4>Prestadores de Serviço</h4>
+          <h4><span class="segment-emoji">🏗️</span> Prestadores de Serviço</h4>
           <p>Orçamentos automáticos, agendamento de visitas, confirmação de contratos e cobrança recorrente.</p>
           <span class="segment-tag">Operação descentralizada</span>
           <div class="segment-stat"><strong>↑ 43%</strong><span>na conversão de orçamentos com follow-up automático</span></div>
         </div>
       </div>
       <div class="segment-card fade-in">
-        <span class="segment-emoji">🎓</span>
         <div class="segment-info">
-          <h4>Educação & Treinamentos</h4>
+          <h4><span class="segment-emoji">🎓</span> Educação & Treinamentos</h4>
           <p>Captação e nutrição de alunos, automação de matrículas, suporte automático e relatórios de engajamento.</p>
           <span class="segment-tag">Funil de vendas complexo</span>
           <div class="segment-stat"><strong>↑ 35%</strong><span>nas matrículas com nutrição automática de leads</span></div>
@@ -570,8 +639,8 @@
       <li><i class="fas fa-check-circle"></i> Implementações adaptadas ao seu tipo de negócio</li>
       <li><i class="fas fa-check-circle"></i> Suporte e acompanhamento em toda a implementação</li>
     </ul>
-    <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Quero%20saber%20como%20a%20MHF%20Partners%20pode%20ajudar%20o%20meu%20negócio." target="_blank" class="btn-primary" style="font-size:1rem;padding:16px 32px">
-      <i class="fab fa-whatsapp"></i> Falar com a MHF Partners no WhatsApp
+    <a href="#" onclick="openQuiz(event)" class="btn-primary" style="font-size:1rem;padding:16px 32px">
+      Falar com a MHF Partners
     </a>
     <p class="final-trust">Especialistas em IA e automação para empresas de todos os segmentos.</p>
   </div>
@@ -627,7 +696,7 @@
         <li><a href="#hero">Início</a></li>
         <li><a href="#how">Como Funciona</a></li>
         <li><a href="#faq">FAQ</a></li>
-        <li><a href="https://wa.me/55INSERIR_NUMERO" target="_blank">Falar com a MHF Partners</a></li>
+        <li><a href="#" onclick="openQuiz(event)">Falar com a MHF Partners</a></li>
       </ul>
     </div>
     <div>
@@ -652,10 +721,31 @@
 <!-- ── FLOATING WHATSAPP ── -->
 <div id="float-wa">
   <span class="float-wa-label">Fale conosco agora</span>
-  <a href="https://wa.me/55INSERIR_NUMERO?text=Olá!%20Vim%20pelo%20site%20da%20MHF%20Partners." target="_blank" class="float-wa-bubble">
+  <a href="#" onclick="openQuiz(event)" class="float-wa-bubble">
     <div class="float-wa-ping"></div>
     <i class="fab fa-whatsapp"></i>
   </a>
+</div>
+
+<!-- ── QUIZ CHAT ── -->
+<div id="quiz-popup">
+  <div class="quiz-container">
+    <div class="quiz-header">
+      <div class="quiz-avatar-wrap">
+        <!-- Para usar foto: substitua o div abaixo por <img class="quiz-avatar-img" src="foto.jpg" alt="MHF"> -->
+        <div class="quiz-avatar-initials">MHF</div>
+        <span class="quiz-avatar-dot"></span>
+      </div>
+      <div class="quiz-header-info">
+        <span class="quiz-header-name">MHF Partners</span>
+        <span class="quiz-header-sub">● Online agora · Responde em instantes</span>
+      </div>
+      <button class="quiz-close" onclick="closeQuiz()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="quiz-prog-bar"><div class="quiz-prog-fill" id="qprogress"></div></div>
+    <div class="quiz-messages" id="quiz-messages"></div>
+    <div class="quiz-input-area" id="quiz-input-area"></div>
+  </div>
 </div>
 
 <!-- ── EXIT INTENT POPUP ── -->
@@ -677,6 +767,237 @@
 </div>
 
 <script>
+  // ── QUIZ CHAT ENGINE ──
+  const qData = {};
+  let qStep = 0;
+
+  const STATE_MSGS = {
+    'São Paulo':          'São Paulo é o maior polo econômico do país — empresas que adotam IA aqui saem na frente de uma concorrência que não perdoa.',
+    'Minas Gerais':       'Minas Gerais tem um dos ecossistemas empresariais mais sólidos do país — IA é o diferencial que separa quem cresce de quem fica parado.',
+    'Rio de Janeiro':     'O Rio de Janeiro tem uma das economias mais diversificadas do Brasil — empresas que automatizam processos aqui escalam sem depender de mais gente.',
+    'Rio Grande do Sul':  'O Rio Grande do Sul tem uma das bases industriais mais fortes do Sul — IA é o motor que faz empresas crescerem sem travar no operacional.',
+    'Paraná':             'O Paraná é referência em agronegócio e indústria — e IA está transformando como essas empresas operam e escalam resultado.',
+    'Santa Catarina':     'Santa Catarina é um dos estados que mais cresce no Brasil — IA é o que separa as empresas que acompanham esse ritmo das que ficam para trás.',
+    'Bahia':              'A Bahia tem uma das economias mais dinâmicas do Nordeste — automação com IA é o caminho para empresas daqui competirem em nível nacional.',
+    'Pernambuco':         'Pernambuco é o hub de tecnologia do Nordeste — empresas que adotam IA aqui já estão um passo à frente da concorrência.',
+    'Ceará':              'O Ceará cresce como polo de serviços e tecnologia no Nordeste — e IA é o que acelera esse crescimento sem precisar aumentar o time.',
+    'Goiás':              'Goiás é o coração do agronegócio e do comércio do Centro-Oeste — empresas que automatizam processos aqui crescem mais sem aumentar custos.',
+    'Mato Grosso do Sul': 'Mato Grosso do Sul é potência no agronegócio e comércio — e IA aqui pode ser o time virtual que nunca para, mantendo sua operação em outro nível.',
+    'Mato Grosso':        'Mato Grosso tem uma das economias mais aquecidas do Centro-Oeste — IA é o diferencial que permite empresas daqui escalar sem perder o controle.',
+    'Espírito Santo':     'O Espírito Santo tem uma economia logística e industrial em crescimento constante — automação com IA é o que permite operar mais com menos.',
+    'Pará':               'O Pará é uma das economias que mais crescem no Norte — e IA é o que permite empresas daqui escalar sem perder o controle da operação.',
+    'Amazonas':           'O Amazonas tem um polo industrial estratégico e um mercado em expansão — IA aqui pode transformar como empresas operam e entregam resultado.',
+    'Distrito Federal':   'O Distrito Federal tem um dos maiores PIBs per capita do Brasil — empresas que adotam IA aqui saem na frente em eficiência e resultado.',
+    'Maranhão':           'O Maranhão cresce como polo logístico e comercial — automação com IA é o que permite empresas daqui competir em nível nacional.',
+    'Rio Grande do Norte':'O Rio Grande do Norte cresce como polo de serviços e energia — IA é o diferencial para empresas daqui escalarem sem aumentar o time.',
+    'Paraíba':            'A Paraíba cresce como polo de tecnologia e serviços no Nordeste — IA é o diferencial para empresas daqui operarem em outro nível.',
+    'Alagoas':            'Alagoas tem um mercado em crescimento constante — IA é o que permite empresas daqui operar com mais eficiência e gerar mais resultado.',
+    'Sergipe':            'Sergipe tem uma economia dinâmica e em crescimento — IA é o que permite empresas daqui competir em nível nacional sem aumentar custos.',
+    'Tocantins':          'Tocantins cresce como polo logístico e do agronegócio — automação com IA é o diferencial para empresas daqui operarem em outro nível.',
+    'Rondônia':           'Rondônia tem um agronegócio em expansão e comércio aquecido — IA é o que permite crescer sem depender de mais pessoas na operação.',
+    'Piauí':              'O Piauí cresce como polo agro e comercial — automação com IA é o que separa empresas que crescem das que ficam presas no operacional.',
+    'Acre':               'O Acre tem um mercado em crescimento constante — IA é o que permite empresas daqui operar com mais inteligência e gerar mais resultado.',
+    'Roraima':            'Roraima tem um mercado em expansão — automação com IA é o diferencial para empresas crescerem de forma estruturada e sustentável.',
+    'Amapá':              'O Amapá tem um mercado em crescimento — e IA é o que permite empresas daqui competir com mais eficiência e menos custo operacional.',
+  };
+  const DEFAULT_STATE_MSG = 'No Brasil inteiro, empresas de todos os tamanhos estão usando IA para crescer mais e gastar menos.';
+
+  async function detectState() {
+    try {
+      const res = await fetch('https://ipapi.co/json/');
+      const json = await res.json();
+      const region = json.region || '';
+      qData.stateMsg = STATE_MSGS[region] || DEFAULT_STATE_MSG;
+    } catch (_) {
+      qData.stateMsg = DEFAULT_STATE_MSG;
+    }
+  }
+
+  const SEGMENTOS = ['Agência','Agronegócio','Alimentação e Bebidas','Automotivo','Beleza e Estética','Construção e Engenharia','Consultoria','E-commerce','Educação','Financeiro','Imobiliário','Indústria','Jurídico / Advocacia','Saúde','Serviços','Tecnologia','Varejo','Outro'];
+  const CARGOS = ['Sócio ou Fundador','Presidente ou CEO','C-Level','Diretor','Gerente','Analista'];
+  const FATURAMENTOS = ['Até R$500 mil/ano','R$500 mil a R$1 milhão/ano','R$1 a R$5 milhões/ano','R$5 a R$10 milhões/ano','R$10 a R$50 milhões/ano','R$50 a R$100 milhões/ano','Acima de R$100 milhões/ano','Ainda não faturo'];
+  const COLABORADORES = ['1 a 5 colaboradores','6 a 10 colaboradores','11 a 20 colaboradores','20 a 50 colaboradores','50 a 100 colaboradores','100 a 300 colaboradores','Mais de 300 colaboradores'];
+
+  const QUIZ_STEPS = [
+    { msgs: ['Empresas que aplicam IA da forma certa estão reduzindo custos em até 40% e aumentando receita sem aumentar o time.', 'Quer descobrir como isso pode transformar o seu negócio? Então bora começar! <strong>Qual o seu nome completo?</strong>'], input: { type:'text', field:'nome', label:'NOME COMPLETO', placeholder:'Seu nome completo...', privacy:true } },
+    { msgs: [d=>`Prazer, <strong>${d.nome}</strong>! Qual o seu WhatsApp?`], input: { type:'phone', field:'whatsapp', label:'WHATSAPP', placeholder:'(11) 99999-9999' } },
+    { msgs: [d=>`${d.stateMsg || DEFAULT_STATE_MSG} O seu negócio pode ser o próximo. <strong>Qual o seu e-mail?</strong>`], input: { type:'email', field:'email', label:'E-MAIL', placeholder:'seu@email.com' } },
+    { msgs: ['Ótimo! Qual o nome da sua empresa?'], input: { type:'text', field:'empresa', label:'EMPRESA', placeholder:'Nome da sua empresa...' } },
+    { msgs: [d=>`Legal, <strong>${d.empresa}</strong>! Qual o segmento da sua empresa?`], input: { type:'select', field:'segmento', label:'SEGMENTO', placeholder:'Selecione o segmento da sua empresa', options:SEGMENTOS } },
+    { msgs: [d=>`Ótimo! E qual é o seu cargo na <strong>${d.empresa}</strong>?`], input: { type:'list', field:'cargo', options:CARGOS } },
+    { msgs: [d=>['Sócio ou Fundador','Presidente ou CEO','C-Level'].includes(d.cargo) ? `Ótimo, <strong>${d.nome}</strong>! Quem tá no comando consegue decidir rápido e implementar IA onde realmente move a agulha no resultado. Vou preparar um diagnóstico focado em ROI mensurável para os próximos 30 dias. Hoje, qual é o faturamento anual da <strong>${d.empresa}</strong>?` : `Perfeito, <strong>${d.nome}</strong>! Com o seu perfil, vou estruturar as melhores oportunidades de automação para a <strong>${d.empresa}</strong> gerar mais resultado. Qual é o faturamento anual da empresa?`], input: { type:'list', field:'faturamento', options:FATURAMENTOS } },
+    { msgs: [d=>`Excelente! Com essas informações já tenho o que preciso para o diagnóstico da <strong>${d.empresa}</strong>. Quantos colaboradores trabalham na empresa?`], input: { type:'list', field:'colaboradores', options:COLABORADORES } },
+    { msgs: [d=>`Perfeito, <strong>${d.nome}</strong>! Agora é só agendar uma conversa rápida — vou apresentar as oportunidades de automação que identificamos para a <strong>${d.empresa}</strong>.`], input: { type:'calendar' } }
+  ];
+
+  function openQuiz(e) {
+    if (e) e.preventDefault();
+    Object.keys(qData).forEach(k => delete qData[k]);
+    qStep = 0;
+    document.getElementById('quiz-messages').innerHTML = '';
+    document.getElementById('quiz-input-area').innerHTML = '';
+    document.getElementById('qprogress').style.width = '0%';
+    document.getElementById('quiz-popup').classList.add('active');
+    detectState(); // inicia em paralelo; resultado chega antes do passo de e-mail
+    runQStep(0);
+  }
+
+  function closeQuiz() { document.getElementById('quiz-popup').classList.remove('active'); }
+
+  function qScroll() { const m = document.getElementById('quiz-messages'); setTimeout(()=>{ m.scrollTop = m.scrollHeight; }, 60); }
+
+  function qProgress() {
+    const pct = Math.round((qStep / (QUIZ_STEPS.length - 1)) * 100);
+    document.getElementById('qprogress').style.width = pct + '%';
+  }
+
+  function qAvatarHTML() {
+    return `<div class="quiz-msg-av">MHF</div>`;
+    // To use photo: return `<div class="quiz-msg-av"><img src="foto.jpg" alt="MHF"></div>`;
+  }
+
+  function addBotMsg(html) {
+    return new Promise(resolve => {
+      const msgs = document.getElementById('quiz-messages');
+      const typing = document.createElement('div');
+      typing.className = 'quiz-typing';
+      typing.innerHTML = `${qAvatarHTML()}<div class="quiz-typing-bubble"><span class="quiz-typing-dot"></span><span class="quiz-typing-dot"></span><span class="quiz-typing-dot"></span></div>`;
+      msgs.appendChild(typing);
+      qScroll();
+      setTimeout(() => {
+        msgs.removeChild(typing);
+        const el = document.createElement('div');
+        el.className = 'quiz-msg bot';
+        el.innerHTML = `${qAvatarHTML()}<div class="quiz-msg-bubble">${html}</div>`;
+        msgs.appendChild(el);
+        qScroll();
+        resolve();
+      }, 850);
+    });
+  }
+
+  function addUserMsg(text) {
+    const el = document.createElement('div');
+    el.className = 'quiz-msg user';
+    el.innerHTML = `<div class="quiz-msg-bubble">${text}</div>`;
+    document.getElementById('quiz-messages').appendChild(el);
+    qScroll();
+  }
+
+  async function runQStep(i) {
+    if (i >= QUIZ_STEPS.length) return;
+    const step = QUIZ_STEPS[i];
+    for (const m of step.msgs) {
+      await addBotMsg(typeof m === 'function' ? m(qData) : m);
+    }
+    renderQInput(step.input);
+  }
+
+  function renderQInput(cfg) {
+    const area = document.getElementById('quiz-input-area');
+    area.innerHTML = '';
+    area._cfg = cfg;
+    if (cfg.type === 'text' || cfg.type === 'email') {
+      area.innerHTML = `
+        <span class="quiz-input-label">${cfg.label}</span>
+        <div class="quiz-input-row">
+          <input type="${cfg.type === 'email' ? 'email' : 'text'}" class="quiz-field" id="qfield" placeholder="${cfg.placeholder}" autocomplete="off">
+          <button class="quiz-send-btn" onclick="qSubmitText()"><i class="fas fa-arrow-up"></i></button>
+        </div>
+        <div class="quiz-field-error" id="qerror"></div>
+        ${cfg.privacy ? '<p class="quiz-privacy">Ao continuar, você concorda com a <a href="/politica-de-privacidade">Política de Privacidade</a> e o <a href="/termos-de-uso">Termo de Consentimento</a>.</p>' : ''}`;
+      const f = document.getElementById('qfield');
+      setTimeout(()=>f?.focus(), 100);
+      f.addEventListener('keydown', e=>{ if(e.key==='Enter') qSubmitText(); });
+    } else if (cfg.type === 'phone') {
+      area.innerHTML = `
+        <span class="quiz-input-label">${cfg.label}</span>
+        <div class="quiz-input-row">
+          <span class="quiz-phone-code">🇧🇷 +55</span>
+          <input type="tel" class="quiz-field" id="qfield" placeholder="${cfg.placeholder}">
+          <button class="quiz-send-btn" onclick="qSubmitText()"><i class="fas fa-arrow-up"></i></button>
+        </div>
+        <div class="quiz-field-error" id="qerror"></div>`;
+      const f = document.getElementById('qfield');
+      setTimeout(()=>f?.focus(), 100);
+      f.addEventListener('keydown', e=>{ if(e.key==='Enter') qSubmitText(); });
+    } else if (cfg.type === 'select') {
+      const opts = cfg.options.map(o=>`<option value="${o}">${o}</option>`).join('');
+      area.innerHTML = `
+        <span class="quiz-input-label">${cfg.label}</span>
+        <div class="quiz-select-wrap">
+          <select class="quiz-select" id="qfield"><option value="" disabled selected>${cfg.placeholder}</option>${opts}</select>
+          <i class="fas fa-chevron-down quiz-select-chevron"></i>
+        </div>
+        <button class="quiz-confirm-btn" onclick="qSubmitSelect()">Continuar <i class="fas fa-arrow-right" style="font-size:.78rem"></i></button>`;
+    } else if (cfg.type === 'list') {
+      const items = cfg.options.map(o=>`<button class="quiz-list-item" onclick="qSubmitList(this,'${o.replace(/'/g,"\\'")}')">${o}<i class="fas fa-chevron-right"></i></button>`).join('');
+      area.innerHTML = `<div class="quiz-list">${items}</div>`;
+    } else if (cfg.type === 'calendar') {
+      area.innerHTML = `
+        <div class="quiz-cal">
+          <div class="quiz-cal-header">
+            <i class="fas fa-calendar-check quiz-cal-icon"></i>
+            <div><div class="quiz-cal-title">Agende sua reunião gratuita</div><div class="quiz-cal-sub">Diagnóstico personalizado · 30 minutos</div></div>
+          </div>
+          <p class="quiz-cal-body">Escolha o melhor horário para uma conversa rápida com nossa equipe e receba seu diagnóstico completo.</p>
+          <a href="#" class="quiz-cal-cta" onclick="qFinalize(event)"><i class="fab fa-whatsapp"></i> Confirmar pelo WhatsApp</a>
+        </div>`;
+    }
+  }
+
+  function qSubmitText() {
+    const cfg = document.getElementById('quiz-input-area')._cfg;
+    const f = document.getElementById('qfield');
+    const err = document.getElementById('qerror');
+    const val = f.value.trim();
+    if (!val) { err.textContent = 'Por favor, preencha este campo.'; return; }
+    if (cfg.field === 'nome' && !val.includes(' ')) { err.textContent = 'Por favor, digite seu nome completo (nome e sobrenome).'; return; }
+    if (cfg.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) { err.textContent = 'Por favor, digite um e-mail válido.'; return; }
+    qData[cfg.field] = cfg.field === 'whatsapp' ? '+55 ' + val : val;
+    addUserMsg(qData[cfg.field]);
+    qNext();
+  }
+
+  function qSubmitSelect() {
+    const cfg = document.getElementById('quiz-input-area')._cfg;
+    const f = document.getElementById('qfield');
+    if (!f.value) return;
+    qData[cfg.field] = f.value;
+    addUserMsg(f.value);
+    qNext();
+  }
+
+  function qSubmitList(btn, value) {
+    const cfg = document.getElementById('quiz-input-area')._cfg;
+    qData[cfg.field] = value;
+    addUserMsg(value);
+    qNext();
+  }
+
+  function qNext() {
+    qStep++;
+    qProgress();
+    document.getElementById('quiz-input-area').innerHTML = '';
+    runQStep(qStep);
+  }
+
+  function qFinalize(e) {
+    e.preventDefault();
+    const msg = encodeURIComponent(
+      `Olá! Preenchi o formulário no site da MHF Partners.\n\n` +
+      `👤 Nome: ${qData.nome||''}\n📱 WhatsApp: ${qData.whatsapp||''}\n📧 E-mail: ${qData.email||''}\n` +
+      `🏢 Empresa: ${qData.empresa||''}\n🏷️ Segmento: ${qData.segmento||''}\n💼 Cargo: ${qData.cargo||''}\n` +
+      `💰 Faturamento: ${qData.faturamento||''}\n👥 Colaboradores: ${qData.colaboradores||''}`
+    );
+    window.open(`https://wa.me/55INSERIR_NUMERO?text=${msg}`, '_blank');
+    closeQuiz();
+  }
+
+  document.getElementById('quiz-popup').addEventListener('click', function(e) {
+    if (e.target === this) closeQuiz();
+  });
+
   // Navbar scroll
   window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);

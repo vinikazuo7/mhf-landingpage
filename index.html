@@ -354,7 +354,7 @@
     <h1 class="hero-title">Sua Empresa Operando<br>no <em>Próximo Nível.</em></h1>
     <p class="hero-subtitle">A MHF Partners implementa Inteligência Artificial e automações sob medida para empresas que querem crescer sem aumentar custos — eliminando tarefas manuais, acelerando processos e gerando resultado mensurável.</p>
     <div class="hero-ctas">
-      <a href="#" class="btn-primary btn-pink" onclick="openQuiz(event)">
+      <a href="#" class="btn-primary" onclick="openQuiz(event)">
         Quero Conhecer
       </a>
       <a href="#how" class="btn-secondary">Como Funciona <i class="fas fa-arrow-down" style="font-size:.8rem"></i></a>
@@ -773,7 +773,9 @@
 
   function sendToSheet(payload) {
     if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'INSERIR_URL_DO_APPS_SCRIPT') return;
-    const url = APPS_SCRIPT_URL + '?data=' + encodeURIComponent(JSON.stringify(payload));
+    const data = Object.assign({}, payload);
+    if (data.whatsapp) data.whatsapp = data.whatsapp.replace(/^\+/, '');
+    const url = APPS_SCRIPT_URL + '?data=' + encodeURIComponent(JSON.stringify(data));
     fetch(url, { mode: 'no-cors' }).catch(() => {});
   }
 
